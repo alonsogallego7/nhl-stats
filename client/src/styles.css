@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --color-nhl-black: #0a0a0aff;
+  --color-nhl-white: #F5F5F5;
+  --color-nhl-blue: #005EB8;
+  --color-nhl-orange: #FF4C00;
+  --color-nhl-yellow: #FFB81C;
+}
