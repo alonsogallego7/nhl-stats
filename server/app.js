@@ -1,18 +1,26 @@
 var createError = require('http-errors');
 var express = require('express');
 var logger = require('morgan');
+var cors = require('cors');
 
 var indexRouter = require('./routes/players');
 var teamsRouter = require('./routes/teams');
+var gamesRouter = require('./routes/games');
+var standingsRouter = require('./routes/standings');
+var statsRouter = require('./routes/stats');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/teams', teamsRouter);
+app.use('/games', gamesRouter);
+app.use('/standings', standingsRouter);
+app.use('/stats', statsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,59 @@
+<!-- Games Carousel -->
+<div class="relative w-full bg-transparent p-2 md:p-4 group">
+  
+  <!-- Header del Carrusel -->
+  <div class="flex items-center justify-between mb-2 md:px-2">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-nhl-blue"></span>
+      <h2 class="text-xs md:text-sm font-black tracking-widest uppercase text-white">Today's Games</h2>
+    </div>
+    <a href="#" class="text-[10px] md:text-xs font-bold text-gray-400 hover:text-white tracking-wider transition-colors">VIEW SCHEDULE</a>
+  </div>
+
+  <div class="relative w-full">
+    <!-- Botón Izquierda -->
+    <button (click)="scrollLeft()" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 md:-ml-5 z-20 w-8 h-8 md:w-10 md:h-10 bg-[#1a1a1a] rounded-full shadow-md border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#2a2a2a] hover:scale-105 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:border-white/20">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M560.67-240 320-480.67l240.67-240.66L608-674 414.67-480.67 608-287.33 560.67-240Z"/></svg>
+    </button>
+
+    <!-- Scroll Container -->
+    <div #carousel class="flex w-full overflow-x-auto pb-2 md:px-2 pt-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] scroll-smooth">
+      <div class="flex gap-4 w-max pr-2">
+        @for (game of games; track game.id) {
+          <div class="bg-white border border-gray-100 text-nhl-black rounded-xl p-3 min-w-[220px] hover:bg-gray-50 hover:border-gray-200 cursor-pointer transition-colors flex flex-col justify-between shadow-sm">
+            <div class="text-[10px] text-gray-500 mb-2 font-bold tracking-wider flex justify-between uppercase">
+              <span>{{ game.gameDate | date:'MMM d' }}</span>
+              <span [class.text-red-500]="game.gameState === 'LIVE' || game.gameState === 'CRIT'">
+                {{ game.gameState === 'OFF' || game.gameState === 'FINAL' ? 'FINAL' : (game.gameState === 'LIVE' || game.gameState === 'CRIT' ? 'LIVE' : (game.startTimeUTC | date:'shortTime')) }}
+              </span>
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-2">
+                <img [src]="game.awayTeam.logo" class="w-10 h-10 object-contain drop-shadow-sm" [alt]="game.awayTeam.abbrev">
+                <span class="font-bold text-nhl-black">{{ game.awayTeam.abbrev }}</span>
+              </div>
+              <span class="font-black text-lg text-nhl-black" [class.opacity-50]="game.gameState === 'FUT'">{{ game.awayTeam.score ?? '-' }}</span>
+            </div>
+            <div class="flex items-center justify-between opacity-90 relative">
+              <div class="flex items-center gap-2">
+                <img [src]="game.homeTeam.logo" class="w-10 h-10 object-contain drop-shadow-sm" [alt]="game.homeTeam.abbrev">
+                <span class="font-bold text-nhl-black">{{ game.homeTeam.abbrev }}</span>
+              </div>
+              <span class="font-black text-lg text-nhl-black" [class.opacity-50]="game.gameState === 'FUT'">{{ game.homeTeam.score ?? '-' }}</span>
+            </div>
+          </div>
+        }
+        @if (games.length === 0) {
+          <div class="py-4 px-8 text-sm font-bold text-gray-500 flex items-center justify-center animate-pulse">
+            Loading games...
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Botón Derecha -->
+    <button (click)="scrollRight()" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-3 md:-mr-5 z-20 w-8 h-8 md:w-10 md:h-10 bg-[#1a1a1a] rounded-full shadow-md border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#2a2a2a] hover:scale-105 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:border-white/20">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M521.33-480.67 328-674l47.33-47.33L616-480.67 375.33-240 328-287.33l193.33-193.34Z"/></svg>
+    </button>
+  </div>
+</div>
