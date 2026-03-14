@@ -1,32 +1,11 @@
 <div class="main-view">
   
+  <!-- Loading Screen -->
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
   <!-- Top Navigation Bar -->
-  <div id="navbar" class="navbar">
-    <div class="navbar-container">
-      <header class="navbar-header">
-        
-        <!-- Logo -->
-        <div class="logo-group">
-          <div class="logo-box">
-            <span class="logo-initial">S</span>
-          </div>
-          <h1 class="logo-title">
-            <span>NHL</span>
-            <span class="logo-title-light">STATS</span>
-          </h1>
-        </div>
-        
-        <!-- Navigation -->
-        <nav class="nav">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="#" class="nav-link">HOME</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </div>
-  </div>
+  <app-navbar></app-navbar>
 
   <!-- Main Content -->
   <div id="main-content" class="main-content">
@@ -83,7 +62,7 @@
             </div>
 
             <!-- Box 3: Teams -->
-            <div class="bento-box">
+            <a routerLink="/teams" class="bento-box">
               <div class="bento-header">
                 <span class="bento-number">03</span>
                 <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -92,7 +71,7 @@
                 <h4 class="bento-title">Teams</h4>
                 <p class="bento-desc">Browse all 32 NHL teams, rosters, and franchise information.</p>
               </div>
-            </div>
+            </a>
 
             <!-- Box 4: Players -->
             <div class="bento-box">
@@ -133,4 +112,5 @@
       </div>
     </div>
   </div>
+  }
 </div>

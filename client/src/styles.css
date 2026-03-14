@@ -165,13 +165,3 @@ img, video {
   max-width: 100%;
   height: auto;
 }
-
-/* Global specific constraints */
-* {
-  border-radius: 8px !important;
-}
-
-html, body, #navbar, #navbar *, #main-content, #main-content > .absolute.inset-0,
-.navbar, .navbar *, .main-content, .main-content-bg {
-  border-radius: 0px !important;
-}

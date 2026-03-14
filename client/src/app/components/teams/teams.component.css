@@ -1,0 +1,153 @@
+.teams-page {
+  min-height: 100vh;
+  background-color: var(--color-nhl-white);
+  color: var(--color-nhl-black);
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Content ---- */
+.teams-content {
+  flex: 1;
+  width: 100%;
+}
+
+.teams-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .teams-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.teams-title-section {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.teams-title {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .teams-title {
+    font-size: 5rem;
+  }
+}
+
+/* ---- Divisions ---- */
+.teams-divisions {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+.division-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.division-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .division-title {
+    font-size: 2rem;
+    margin-left: 0;
+  }
+}
+
+/* ---- Grid ---- */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .teams-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .teams-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .teams-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.03);
+  z-index: 2;
+  filter: brightness(1.1);
+}
+
+.team-card-logo {
+  width: 65%;
+  height: auto;
+  object-fit: contain;
+  flex: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.team-card-name {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  margin-top: 0.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+  .team-card-name {
+    font-size: 0.75rem;
+  }
+}
+
+

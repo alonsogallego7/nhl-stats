@@ -1,0 +1,38 @@
+<div class="teams-page">
+  
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <!-- Top Navigation Bar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <div class="teams-content">
+    <div class="teams-inner">
+
+      <!-- Title -->
+      <div class="teams-title-section">
+        <h2 class="teams-title">Teams</h2>
+      </div>
+
+      <!-- Teams Grouped by Division -->
+      <div class="teams-divisions">
+        @for (group of groupedTeams; track group.divisionName) {
+          <div class="division-section">
+            <h3 class="division-title">{{ group.divisionName }} Division</h3>
+            <div class="teams-grid">
+              @for (team of group.teams; track team.id) {
+                <div class="team-card" [style.background-color]="team.primaryColor">
+                  <img [src]="team.logo" [alt]="team.fullName" class="team-card-logo">
+                  <span class="team-card-name">{{ team.fullName }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+</div>
