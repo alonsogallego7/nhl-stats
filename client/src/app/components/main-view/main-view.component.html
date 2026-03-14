@@ -1,44 +1,26 @@
-<div class="min-h-screen bg-nhl-white text-nhl-black font-sans flex flex-col">
+<div class="main-view">
   
   <!-- Top Navigation Bar -->
-  <div class="w-full bg-nhl-black border-b border-white/10 shadow-md relative z-50">
-    <div class="px-4 md:px-8 max-w-7xl mx-auto">
-      <header class="flex items-center justify-between h-14">
+  <div id="navbar" class="navbar">
+    <div class="navbar-container">
+      <header class="navbar-header">
         
         <!-- Logo -->
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 bg-nhl-blue rounded flex items-center justify-center shadow-lg shadow-nhl-blue/20">
-            <span class="text-white font-black text-lg italic">S</span>
+        <div class="logo-group">
+          <div class="logo-box">
+            <span class="logo-initial">S</span>
           </div>
-          <h1 class="text-xl font-black uppercase tracking-tight flex items-center text-white">
+          <h1 class="logo-title">
             <span>NHL</span>
-            <span class="text-nhl-blue ml-px">STATS</span>
+            <span class="logo-title-light">STATS</span>
           </h1>
         </div>
         
         <!-- Navigation -->
-        <nav class="hidden sm:flex h-full">
-          <ul class="flex items-center h-full text-xs font-bold text-gray-300 tracking-wider">
-            <li class="h-full border-b-2 border-transparent hover:border-white transition-colors">
-              <a href="#" class="px-5 h-full flex items-center hover:text-white transition-colors">HOME</a>
-            </li>
-            
-            <!-- Games Dropdown -->
-            <li class="h-full group">
-              <button class="px-5 h-full flex items-center hover:text-white transition-colors group-hover:text-white border-b-2 border-transparent group-hover:border-nhl-blue cursor-pointer gap-1 focus:outline-none">
-                GAMES
-                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-              </button>
-
-              <div class="absolute left-0 top-14 w-full bg-nhl-black shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border-b border-white/10 origin-top">
-                <div class="max-w-[1600px] w-full mx-auto py-4 px-4 md:px-12">
-                  <app-games></app-games>
-                </div>
-              </div>
-            </li>
-            
-            <li class="h-full border-b-2 border-transparent hover:border-white transition-colors">
-              <a href="#" class="px-5 h-full flex items-center hover:text-white transition-colors">STANDINGS</a>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link">HOME</a>
             </li>
           </ul>
         </nav>
@@ -47,29 +29,108 @@
   </div>
 
   <!-- Main Content -->
-  <div class="relative flex-1 w-full bg-cover bg-center bg-fixed bg-no-repeat overflow-hidden shadow-inner" style="background-image: url('/assets/leafs-senators.jpg'); min-height: calc(100vh - 3.5rem);">
-    <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/80"></div>
+  <div id="main-content" class="main-content">
+    <div class="main-content-bg"></div>
+    <div class="main-content-overlay"></div>
 
-    <div class="relative z-10 w-full px-4 md:px-8 max-w-[1400px] mx-auto py-10 pb-20 flex flex-col lg:flex-row gap-10">
+    <div class="main-content-inner">
       
-      <!-- Left Column: Standings -->
-      <div class="flex-1 flex flex-col gap-6">
-        <div class="mb-2">
-          <h2 class="text-xl font-black text-white tracking-widest uppercase">Standings</h2>
-          <hr class="mt-2 border-white/20">
-        </div>
-        <app-standings-full></app-standings-full>
+      <!-- HERO TITLE -->
+      <div class="hero">
+        <h2 class="hero-title">
+          Embrace<br/>The Ice.
+        </h2>
+        <p class="hero-subtitle">
+          <span class="hero-subtitle-text">
+            The ultimate dashboard for live scores, breaking updates, and player statistics in the NHL.
+          </span>
+        </p>
       </div>
 
-      <!-- Right Column: Statistics -->
-      <aside class="w-full lg:w-80 flex flex-col gap-6">
-        <div class="mb-2">
-          <h2 class="text-xl font-black text-white tracking-widest uppercase">Statistics</h2>
-          <hr class="mt-2 border-white/20">
-        </div>
-        <app-stats-preview></app-stats-preview>
-      </aside>
+      <!-- Carousel Section (Full Width) -->
+      <div class="carousel-container">
+          <app-games></app-games>
+      </div>
 
+      <!-- Bottom Layout -->
+      <div class="bottom-layout">
+         
+         <!-- Bento Grid: 2 per row -->
+         <div class="bento-grid">
+            
+            <!-- Box 1: Full Standings -->
+            <div class="bento-box">
+              <div class="bento-header">
+                <span class="bento-number">01</span>
+                <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+              <div class="bento-content">
+                <h4 class="bento-title">Full<br>Standings</h4>
+                <p class="bento-desc">Dive deep into the full conference and division rankings.</p>
+              </div>
+            </div>
+
+            <!-- Box 2: Statistics -->
+            <div class="bento-box">
+              <div class="bento-header">
+                <span class="bento-number">02</span>
+                <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+              <div class="bento-content">
+                <h4 class="bento-title">Statistics</h4>
+                <p class="bento-desc">Explore detailed player and team stats across the entire season.</p>
+              </div>
+            </div>
+
+            <!-- Box 3: Teams -->
+            <div class="bento-box">
+              <div class="bento-header">
+                <span class="bento-number">03</span>
+                <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+              <div class="bento-content">
+                <h4 class="bento-title">Teams</h4>
+                <p class="bento-desc">Browse all 32 NHL teams, rosters, and franchise information.</p>
+              </div>
+            </div>
+
+            <!-- Box 4: Players -->
+            <div class="bento-box">
+              <div class="bento-header">
+                <span class="bento-number">04</span>
+                <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+              <div class="bento-content">
+                <h4 class="bento-title">Players</h4>
+                <p class="bento-desc">Search and discover player profiles, career stats, and highlights.</p>
+              </div>
+            </div>
+
+            <!-- Box 5: Game Center -->
+            <div class="bento-box bento-box-wide">
+              <div class="bento-header">
+                <span class="bento-number">05</span>
+                <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+              <div class="bento-content">
+                <h4 class="bento-title">Game Center</h4>
+                <p class="bento-desc">Live play-by-play, boxscores, and real-time game updates all in one place.</p>
+              </div>
+            </div>
+
+         </div>
+
+         <!-- Right Content: Stats Preview Sidebar -->
+         <aside class="sidebar">
+            <div class="sidebar-header">
+              <h2 class="sidebar-title">Stats</h2>
+            </div>
+            <div class="sidebar-content">
+              <app-stats-preview></app-stats-preview>
+            </div>
+         </aside>
+
+      </div>
     </div>
   </div>
 </div>

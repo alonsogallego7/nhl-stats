@@ -12,6 +12,7 @@ export class GamesComponent implements OnInit {
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
 
   games: any[] = [];
+  isLoading: boolean = true;
 
   constructor(private gamesService: GamesService) {}
 
@@ -26,8 +27,12 @@ export class GamesComponent implements OnInit {
         });
         
         this.games = gamesList;
+        this.isLoading = false;
       },
-      error: (err) => console.error('Error fetching games:', err)
+      error: (err) => {
+        console.error('Error fetching games:', err);
+        this.isLoading = false;
+      }
     });
   }
 

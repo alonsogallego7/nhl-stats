@@ -1,141 +1,137 @@
-<div class="flex flex-col gap-6">
+<div class="stats-preview-container">
 
   <!-- Toggle: Players / Teams -->
-  <div class="flex w-full p-1 rounded-xl shadow-2xl bg-nhl-black">
+  <div class="toggle-container">
     <button (click)="setViewMode('players')" 
-            [class.bg-white]="viewMode === 'players'" 
-            [class.text-nhl-black]="viewMode === 'players'" 
-            [class.text-white]="viewMode !== 'players'" 
-            [class.shadow-sm]="viewMode === 'players'"
-            class="flex-1 text-xs font-black tracking-[0.2em] uppercase py-2.5 rounded-lg transition-all">
+            [class.toggle-active]="viewMode === 'players'" 
+            [class.toggle-inactive]="viewMode !== 'players'" 
+            class="toggle-btn">
       Players
     </button>
     <button (click)="setViewMode('teams')" 
-            [class.bg-white]="viewMode === 'teams'" 
-            [class.text-nhl-black]="viewMode === 'teams'" 
-            [class.text-white]="viewMode !== 'teams'" 
-            [class.shadow-sm]="viewMode === 'teams'"
-            class="flex-1 text-xs font-black tracking-[0.2em] uppercase py-2.5 rounded-lg transition-all">
+            [class.toggle-active]="viewMode === 'teams'" 
+            [class.toggle-inactive]="viewMode !== 'teams'" 
+            class="toggle-btn">
       Teams
     </button>
   </div>
 
   @if (viewMode === 'players') {
     <!-- Points -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-blue-800 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Total Points</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Total Points</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (player of pointsLeaders; track player.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-blue-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="player.headshot" [alt]="player.lastName.default" class="w-10 h-10 rounded-full object-cover object-top shadow-sm bg-gray-200" (error)="player.headshot = player.teamLogo">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight">{{ player.firstName.default }} {{ player.lastName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ player.teamName.default }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
+            <div class="stat-info">
+              <p class="stat-name">{{ player.firstName.default }} {{ player.lastName.default }}</p>
+              <p class="stat-subname">{{ player.teamName.default }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-blue-700">{{ player.value }}</div>
+            <div class="stat-value">{{ player.value }}</div>
           </div>
         }
       </div>
     </div>
 
     <!-- Goals -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-red-700 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Goals</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Goals</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (player of goalsLeaders; track player.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-red-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="player.headshot" [alt]="player.lastName.default" class="w-10 h-10 rounded-full object-cover object-top shadow-sm bg-gray-200" (error)="player.headshot = player.teamLogo">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight">{{ player.firstName.default }} {{ player.lastName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ player.teamName.default }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
+            <div class="stat-info">
+              <p class="stat-name">{{ player.firstName.default }} {{ player.lastName.default }}</p>
+              <p class="stat-subname">{{ player.teamName.default }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-red-700">{{ player.value }}</div>
+            <div class="stat-value">{{ player.value }}</div>
           </div>
         }
       </div>
     </div>
 
     <!-- Assists -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-emerald-600 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Assists</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Assists</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (player of assistsLeaders; track player.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-emerald-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="player.headshot" [alt]="player.lastName.default" class="w-10 h-10 rounded-full object-cover object-top shadow-sm bg-gray-200" (error)="player.headshot = player.teamLogo">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight">{{ player.firstName.default }} {{ player.lastName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ player.teamName.default }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
+            <div class="stat-info">
+              <p class="stat-name">{{ player.firstName.default }} {{ player.lastName.default }}</p>
+              <p class="stat-subname">{{ player.teamName.default }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-emerald-700">{{ player.value }}</div>
+            <div class="stat-value">{{ player.value }}</div>
           </div>
         }
       </div>
     </div>
   } @else {
     <!-- Team Points -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-blue-800 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Total Points</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Total Points</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (team of teamPointsLeaders; track team.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-blue-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="w-10 h-10 object-contain drop-shadow-sm">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight uppercase">{{ team.teamName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ team.teamAbbrev }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
+            <div class="stat-info">
+              <p class="stat-name stat-name-upper">{{ team.teamName.default }}</p>
+              <p class="stat-subname">{{ team.teamAbbrev }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-blue-700">{{ team.value }}</div>
+            <div class="stat-value">{{ team.value }}</div>
           </div>
         }
       </div>
     </div>
 
     <!-- Team Total Goals -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-red-700 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Total Goals</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Total Goals</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (team of teamGoalsForLeaders; track team.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-red-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="w-10 h-10 object-contain drop-shadow-sm">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight uppercase">{{ team.teamName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ team.teamAbbrev }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
+            <div class="stat-info">
+              <p class="stat-name stat-name-upper">{{ team.teamName.default }}</p>
+              <p class="stat-subname">{{ team.teamAbbrev }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-red-700">{{ team.value }}</div>
+            <div class="stat-value">{{ team.value }}</div>
           </div>
         }
       </div>
     </div>
 
     <!-- Team Goal Differential -->
-    <div class="rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="bg-emerald-600 py-3 px-4 flex justify-center items-center">
-        <h3 class="font-black text-white uppercase tracking-widest text-sm">Goal Differential</h3>
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-title">Goal Differential</h3>
       </div>
-      <div class="flex-1 flex flex-col pt-2 px-2 pb-2 gap-1 bg-white/95 backdrop-blur-md">
+      <div class="stat-list">
         @for (team of teamGoalDiffLeaders; track team.id; let i = $index) {
-          <div class="flex items-center p-2 rounded-lg hover:bg-black/5 transition-colors group">
-            <span class="w-6 text-center font-black text-gray-400 group-hover:text-emerald-700 transition-colors mr-2">{{ i + 1 }}</span>
-            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="w-10 h-10 object-contain drop-shadow-sm">
-            <div class="ml-3 flex-1 flex flex-col justify-center">
-              <p class="font-bold text-xs text-nhl-black leading-tight uppercase">{{ team.teamName.default }}</p>
-              <p class="text-[9px] font-bold tracking-wider text-gray-400 uppercase mt-0.5">{{ team.teamAbbrev }}</p>
+          <div class="stat-item">
+            <span class="stat-rank">{{ i + 1 }}</span>
+            <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
+            <div class="stat-info">
+              <p class="stat-name stat-name-upper">{{ team.teamName.default }}</p>
+              <p class="stat-subname">{{ team.teamAbbrev }}</p>
             </div>
-            <div class="ml-auto font-black text-lg text-emerald-700">{{ team.value }}</div>
+            <div class="stat-value">{{ team.value }}</div>
           </div>
         }
       </div>

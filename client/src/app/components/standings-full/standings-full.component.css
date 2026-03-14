@@ -1,0 +1,253 @@
+.standings-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.conference-box {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-transform: uppercase;
+  background-color: transparent;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.conference-header {
+  width: 100%;
+  background-color: #050505; /* nhl-black */
+  color: #ffffff;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.conference-title {
+  font-size: 0.875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.division-container {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  --webkit-backdrop-filter: blur(4px);
+}
+
+@media (min-width: 768px) {
+  .division-container {
+    padding: 2.5rem;
+  }
+}
+
+.division-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .division-grid {
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .division-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.division-card {
+  background-color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.division-header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f3f4f6; /* gray-100 */
+}
+
+.division-title {
+  font-weight: 900;
+  color: #050505;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.standings-table {
+  width: 100%;
+  text-align: left;
+}
+
+.standings-table thead tr {
+  font-size: 10px;
+  color: #9ca3af; /* gray-400 */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: rgba(249, 250, 251, 0.8); /* gray-50/80 */
+  border-bottom: 1px solid #f3f4f6; /* gray-100 */
+  font-weight: 700;
+}
+
+.th-pos {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 4rem;
+  text-align: center;
+}
+
+.th-team {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.th-pts {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: right;
+  width: 5rem;
+}
+
+.table-row {
+  border-bottom: 1px solid #f9fafb; /* gray-50 */
+}
+
+.td-pos {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+.pos-num {
+  font-weight: 900;
+  font-size: 0.875rem;
+  color: #d1d5db; /* gray-300 */
+}
+
+.td-team {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
+}
+
+.team-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-name-full {
+  font-weight: 700;
+  color: #050505; /* nhl-black */
+  font-size: 0.875rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.team-name-short {
+  font-size: 10px;
+  color: #9ca3af; /* gray-400 */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.td-pts {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: right;
+}
+
+.pts-num {
+  font-weight: 900;
+  font-size: 1.125rem;
+  color: #050505;
+}
+
+.loading-box {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  --webkit-backdrop-filter: blur(12px);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db; /* gray-300 */
+}
+
+.loading-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.loading-track {
+  opacity: 0.25;
+}
+
+.loading-spinner {
+  opacity: 0.75;
+}
+
+.loading-text {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
