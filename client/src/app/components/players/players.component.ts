@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { PlayersService } from '../../services/players/players.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LoadingComponent } from '../loading/loading.component';
@@ -8,7 +9,7 @@ import { LoadingComponent } from '../loading/loading.component';
 @Component({
   selector: 'app-players',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent, LoadingComponent],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './players.component.html',
   styleUrl: './players.component.css'
 })

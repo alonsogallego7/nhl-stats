@@ -7,6 +7,7 @@ import { Observable, shareReplay } from 'rxjs';
 })
 export class PlayersService {
   private playersCache$: Observable<any[]> | null = null;
+  private playerDetailCache$: Map<number, Observable<any>> = new Map();
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +18,15 @@ export class PlayersService {
       );
     }
     return this.playersCache$;
+  }
+
+  getPlayerById(id: number): Observable<any> {
+    if (!this.playerDetailCache$.has(id)) {
+      const request$ = this.http.get<any>(`http://localhost:3000/players/player/${id}`).pipe(
+        shareReplay(1)
+      );
+      this.playerDetailCache$.set(id, request$);
+    }
+    return this.playerDetailCache$.get(id)!;
   }
 }

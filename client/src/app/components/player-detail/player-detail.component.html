@@ -1,0 +1,258 @@
+<div class="pd-page">
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  @if (error || !player) {
+    <div class="pd-error">Player not found.</div>
+  } @else {
+
+  <div class="pd-content">
+
+    <!-- ── TOP HEADER ── -->
+    <div class="pd-header">
+      <a routerLink="/players" class="pd-back">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Players</span>
+      </a>
+
+      <div class="pd-header-main">
+
+        <!-- Headshot -->
+        <div class="pd-headshot-wrap">
+          <img [src]="player.headshot" [alt]="player.firstName?.default + ' ' + player.lastName?.default" class="pd-headshot" />
+        </div>
+
+        <!-- Identity -->
+        <div class="pd-identity">
+          <div class="pd-name-row">
+            <span class="pd-number">#{{ player.sweaterNumber }}</span>
+            <h1 class="pd-name">{{ player.firstName?.default }} {{ player.lastName?.default }}</h1>
+          </div>
+          <div class="pd-meta-row">
+            <span class="pd-position-badge">{{ positionFull(player.position) }}</span>
+            <img [src]="player.teamLogo" [alt]="player.currentTeamAbbrev" class="pd-team-logo" />
+            <span class="pd-team-name">{{ player.fullTeamName?.default }}</span>
+          </div>
+          <div class="pd-quick-info">
+            <span>{{ formatBirthDate(player.birthDate) }}</span>
+            <span class="sep">·</span>
+            <span>{{ player.birthCity?.default }}, {{ player.birthCountry }}</span>
+            <span class="sep">·</span>
+            <span>{{ formatHeight(player.heightInInches) }}</span>
+            <span class="sep">·</span>
+            <span>{{ player.weightInPounds }} lbs ({{ player.weightInKilograms }} kg)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANELS GRID ── -->
+    <div class="pd-grid">
+
+      <!-- PERSONAL INFO (wide panel with 3 sections) -->
+      <div class="pd-panel pd-panel-full">
+        <h3 class="pd-panel-title">Player Info</h3>
+        <div class="pd-info-cols">
+
+          <!-- Biography -->
+          <div class="pd-info-col">
+            <p class="pd-info-col-title">Biography</p>
+            <div class="pd-rows">
+              <div class="pd-row"><span class="pd-lbl">Born</span><span class="pd-val">{{ formatBirthDate(player.birthDate) }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">City</span><span class="pd-val">{{ player.birthCity?.default }}, {{ player.birthStateProvince?.default || '' }} {{ player.birthCountry }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Nationality</span><span class="pd-val">{{ player.birthCountry }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Shoots/Catches</span><span class="pd-val">{{ player.shootsCatches === 'L' ? 'Left' : 'Right' }}</span></div>
+            </div>
+          </div>
+
+          <!-- Physical -->
+          <div class="pd-info-col">
+            <p class="pd-info-col-title">Physical</p>
+            <div class="pd-rows">
+              <div class="pd-row"><span class="pd-lbl">Height</span><span class="pd-val">{{ formatHeight(player.heightInInches) }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Weight</span><span class="pd-val">{{ player.weightInPounds }} lbs / {{ player.weightInKilograms }} kg</span></div>
+            </div>
+          </div>
+
+          <!-- Draft -->
+          <div class="pd-info-col">
+            <p class="pd-info-col-title">Draft</p>
+            @if (player.draftDetails) {
+            <div class="pd-rows">
+              <div class="pd-row"><span class="pd-lbl">Year</span><span class="pd-val">{{ player.draftDetails.year }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Team</span><span class="pd-val">{{ player.draftDetails.teamAbbrev }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Round</span><span class="pd-val">Round {{ player.draftDetails.round }}</span></div>
+              <div class="pd-row"><span class="pd-lbl">Pick (Overall)</span><span class="pd-val">#{{ player.draftDetails.pickInRound }} (#{{ player.draftDetails.overallPick }} overall)</span></div>
+            </div>
+            } @else {
+              <p class="pd-rows" style="padding: 0.75rem 0.85rem; color: #999; font-size: 0.8rem;">Undrafted</p>
+            }
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- GOALIE SEASON STATS -->
+      @if (player.position === 'G' && currentNHLSeason) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">This Season — Regular</h3>
+        <div class="pd-stat-grid">
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.wins }}</span><span class="pd-stat-lbl" data-tooltip="Wins">Wins</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.losses }}</span><span class="pd-stat-lbl" data-tooltip="Losses">Losses</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.otLosses }}</span><span class="pd-stat-lbl" data-tooltip="Overtime Losses">OTL</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ formatPct(currentNHLSeason.savePctg) }}</span><span class="pd-stat-lbl" data-tooltip="Save Percentage">SV%</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.goalsAgainstAvg?.toFixed(2) }}</span><span class="pd-stat-lbl" data-tooltip="Goals Against Average">GAA</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.shutouts }}</span><span class="pd-stat-lbl" data-tooltip="Shutouts">Shutouts</span></div>
+        </div>
+      </div>
+      }
+
+      <!-- GOALIE CAREER STATS -->
+      @if (player.position === 'G' && careerRegular) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">Career — Regular Season</h3>
+        <div class="pd-stat-grid">
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesStarted }}</span><span class="pd-stat-lbl" data-tooltip="Games Started">Starts</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.wins }}</span><span class="pd-stat-lbl" data-tooltip="Wins">Wins</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.losses }}</span><span class="pd-stat-lbl" data-tooltip="Losses">Losses</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.otLosses }}</span><span class="pd-stat-lbl" data-tooltip="Overtime Losses">OTL</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ formatPct(careerRegular.savePctg) }}</span><span class="pd-stat-lbl" data-tooltip="Save Percentage">SV%</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.goalsAgainstAvg?.toFixed(2) }}</span><span class="pd-stat-lbl" data-tooltip="Goals Against Average">GAA</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.goalsAgainst }}</span><span class="pd-stat-lbl" data-tooltip="Goals Against">GA</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.shutouts }}</span><span class="pd-stat-lbl" data-tooltip="Shutouts">Shutouts</span></div>
+        </div>
+      </div>
+      }
+
+      <!-- SKATER THIS SEASON -->
+      @if (player.position !== 'G' && currentNHLSeason) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">This Season — Regular</h3>
+        <div class="pd-stat-grid">
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.plusMinus > 0 ? '+' : '' }}{{ currentNHLSeason.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+        </div>
+      </div>
+      }
+
+      <!-- SKATER CAREER REGULAR -->
+      @if (player.position !== 'G' && careerRegular) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">Career — Regular Season</h3>
+        <div class="pd-stat-grid">
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.plusMinus > 0 ? '+' : '' }}{{ careerRegular.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+        </div>
+      </div>
+      }
+
+      <!-- SKATER CAREER PLAYOFFS -->
+      @if (player.position !== 'G' && careerPlayoffs) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">Career — Playoffs</h3>
+        <div class="pd-stat-grid">
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.plusMinus > 0 ? '+' : '' }}{{ careerPlayoffs.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+        </div>
+      </div>
+      }
+
+      <!-- LAST 5 GAMES -->
+      @if (player.last5Games?.length) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">Last 5 Games</h3>
+        <table class="pd-table">
+          @if (player.position === 'G') {
+          <thead><tr><th>Date</th><th>Opponent</th><th class="pd-th-tip" data-tooltip="Decision (Win/Loss/Overtime)">Dec</th><th class="pd-th-tip" data-tooltip="Goals Against">GA</th><th class="pd-th-tip" data-tooltip="Shots Against">SA</th><th class="pd-th-tip" data-tooltip="Save Percentage">SV%</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <tbody>
+            @for (g of player.last5Games; track g.gameId) {
+            <tr>
+              <td>{{ g.gameDate }}</td>
+              <td>
+                @if (g.homeRoadFlag === 'H') {
+                  <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
+                } @else {
+                  <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
+                }
+              </td>
+              <td class="pd-decision-{{ g.decision?.toLowerCase() }}">{{ g.decision || '—' }}</td>
+              <td>{{ g.goalsAgainst }}</td>
+              <td>{{ g.shotsAgainst }}</td>
+              <td>{{ formatPct(g.savePctg) }}</td>
+              <td>{{ g.toi }}</td>
+            </tr>
+            }
+          </tbody>
+          } @else {
+          <thead><tr><th>Date</th><th>Opponent</th><th class="pd-th-tip" data-tooltip="Goals">G</th><th class="pd-th-tip" data-tooltip="Assists">A</th><th class="pd-th-tip" data-tooltip="Points">PTS</th><th class="pd-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="pd-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="pd-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <tbody>
+            @for (g of player.last5Games; track g.gameId) {
+            <tr>
+              <td>{{ g.gameDate }}</td>
+              <td>
+                @if (g.homeRoadFlag === 'H') {
+                  <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
+                } @else {
+                  <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
+                }
+              </td>
+              <td>{{ g.goals }}</td>
+              <td>{{ g.assists }}</td>
+              <td class="pd-pts">{{ g.points }}</td>
+              <td>{{ g.plusMinus > 0 ? '+' : '' }}{{ g.plusMinus }}</td>
+              <td>{{ g.shots }}</td>
+              <td>{{ g.pim }}</td>
+              <td>{{ g.toi }}</td>
+            </tr>
+            }
+          </tbody>
+          }
+        </table>
+      </div>
+      }
+
+      <!-- AWARDS -->
+      @if (player.awards?.length) {
+      <div class="pd-panel pd-panel-wide">
+        <h3 class="pd-panel-title">Awards</h3>
+        <div class="pd-awards">
+          @for (award of player.awards; track award.trophy.default) {
+          <div class="pd-award-item">
+            <span class="pd-award-trophy">🏆 {{ award.trophy.default }}</span>
+            <span class="pd-award-seasons">
+              @for (s of award.seasons; track s.seasonId) {
+                <span class="pd-season-chip">{{ formatSeason(s.seasonId) }}</span>
+              }
+            </span>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+    </div><!-- end pd-grid -->
+  </div><!-- end pd-content -->
+  }
+  }<!-- end !isLoading -->
+</div>
