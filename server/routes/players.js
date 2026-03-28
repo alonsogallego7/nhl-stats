@@ -72,8 +72,8 @@ async function warmPlayersCache() {
   }
 }
 
-// NOTE: Do NOT warm on startup — it eats the NHL API rate limit and blocks the home screen.
-// The cache warms lazily on the first visit to /players/all instead.
+// Start warming the cache as soon as the file gets required (server startup)
+warmPlayersCache();
 
 // GET /players/all — returns all players from all team rosters
 router.get('/all', async function(req, res, next) {

@@ -27,38 +27,46 @@ async function apiCall(endpoint, ttl = 3600000) { // Default TTL: 1 hour (3.6 mi
     return inflight.get(endpoint);
   }
 
-  // 3. Fetch from NHL API and store Promise
+  // 3. Fetch from NHL API with retry for 429 errors
   const requestPromise = (async () => {
-    console.log(`[API FETCH] ${endpoint}`);
-    let url = nhlApiUrl + endpoint;
-    
-    let response = await fetch(url);
-    
-    if (!response.ok) {
-      if (response.status === 429) {
-        console.error(`[API ERROR 429] Rate limited on ${endpoint}`);
+    try {
+      console.log(`[API FETCH] ${endpoint}`);
+      let url = nhlApiUrl + endpoint;
+      
+      const maxRetries = 3;
+      let delay = 500; // Start with 500ms backoff
+      
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        let response = await fetch(url);
+        
+        if (response.ok) {
+          let data = await response.json();
+          cache.set(endpoint, {
+            timestamp: Date.now(),
+            ttl: ttl,
+            data: data
+          });
+          return data;
+        }
+        
+        if (response.status === 429 && attempt < maxRetries) {
+          // Add jitter to avoid thundering herd on retries
+          const jitter = Math.floor(Math.random() * 200);
+          console.warn(`[API 429] Rate limited on ${endpoint}, retry ${attempt + 1}/${maxRetries} in ${delay + jitter}ms`);
+          await new Promise(r => setTimeout(r, delay + jitter));
+          delay *= 2; // Exponential backoff
+          continue;
+        }
+        
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      throw new Error(`HTTP error! status: ${response.status}`);
+    } finally {
+      // Remove from inflight map whether it resolved or rejected
+      inflight.delete(endpoint);
     }
-    
-    let data = await response.json();
-    
-    // Save to cache
-    cache.set(endpoint, {
-      timestamp: Date.now(),
-      ttl: ttl,
-      data: data
-    });
-    
-    return data;
   })();
 
-  // Track the promise and remove it from inflight when settled
   inflight.set(endpoint, requestPromise);
-  requestPromise.finally(() => {
-    inflight.delete(endpoint);
-  });
-
   return requestPromise;
 }
 
