@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/score/now', async function(req, res, next) {
   try {
-    let data = await apiCall('v1/score/now');
+    let data = await apiCall('v1/score/now', 30000); // 30 seconds TTL for live scores
     res.json(data);
   } catch (error) {
     next(error);

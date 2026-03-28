@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 
 export interface StatLeader {
   id: number;
@@ -41,13 +41,25 @@ export interface TeamStatsResponse {
 export class StatsService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000';
+  
+  private leadersCache$: Observable<StatsResponse> | null = null;
+  private teamLeadersCache$: Observable<TeamStatsResponse> | null = null;
 
   getLeaders(): Observable<StatsResponse> {
-    return this.http.get<StatsResponse>(`${this.apiUrl}/stats/leaders`);
+    if (!this.leadersCache$) {
+      this.leadersCache$ = this.http.get<StatsResponse>(`${this.apiUrl}/stats/leaders`).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.leadersCache$;
   }
 
   getTeamLeaders(): Observable<TeamStatsResponse> {
-    return this.http.get<TeamStatsResponse>(`${this.apiUrl}/stats/team-leaders`);
+    if (!this.teamLeadersCache$) {
+      this.teamLeadersCache$ = this.http.get<TeamStatsResponse>(`${this.apiUrl}/stats/team-leaders`).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.teamLeadersCache$;
   }
 }
-

@@ -1,0 +1,6 @@
+# Ignore local project context file
+project_context.txt
+
+# Common Node/Angular ignores
+node_modules/
+.env

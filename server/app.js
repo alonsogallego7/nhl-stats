@@ -3,7 +3,7 @@ var express = require('express');
 var logger = require('morgan');
 var cors = require('cors');
 
-var indexRouter = require('./routes/players');
+var playersRouter = require('./routes/players');
 var teamsRouter = require('./routes/teams');
 var gamesRouter = require('./routes/games');
 var standingsRouter = require('./routes/standings');
@@ -16,7 +16,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
+app.use('/players', playersRouter);
 app.use('/teams', teamsRouter);
 app.use('/games', gamesRouter);
 app.use('/standings', standingsRouter);

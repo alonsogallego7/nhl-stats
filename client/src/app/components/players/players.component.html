@@ -1,0 +1,76 @@
+<div class="players-page">
+
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  <div class="players-content">
+    <div class="players-inner">
+
+      <!-- Title -->
+      <div class="players-title-section">
+        <h2 class="page-title">Players</h2>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-bar-wrapper">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search players by name or team…"
+            [(ngModel)]="searchQuery"
+            autocomplete="off"
+          />
+          @if (searchQuery) {
+            <button class="search-clear" (click)="searchQuery = ''">✕</button>
+          }
+        </div>
+        <p class="search-hint">
+          @if (!searchQuery) {
+            Showing first 30 players — type to search all {{ allPlayers.length }} players
+          } @else {
+            {{ filteredPlayers.length }} player{{ filteredPlayers.length !== 1 ? 's' : '' }} found
+          }
+        </p>
+      </div>
+
+      <!-- Players Grid -->
+      <div class="players-grid">
+        @for (player of filteredPlayers; track player.id) {
+          <div class="player-card">
+            <!-- Photo -->
+            <div class="player-photo-wrap">
+              @if (player.headshot) {
+                <img [src]="player.headshot" [alt]="player.firstName + ' ' + player.lastName" class="player-photo" />
+              } @else {
+                <div class="player-photo-placeholder">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48" opacity="0.3">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                </div>
+              }
+            </div>
+
+            <!-- Info -->
+            <div class="player-info">
+              <p class="player-name">{{ player.firstName }} {{ player.lastName }}</p>
+              <span class="player-position">{{ positionLabel(player.positionCode) }}</span>
+              <div class="player-team">
+                <img [src]="player.teamLogo" [alt]="player.teamAbbrev" class="player-team-logo" />
+                <span class="player-team-abbrev">{{ player.teamAbbrev }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+</div>

@@ -165,3 +165,19 @@ img, video {
   max-width: 100%;
   height: auto;
 }
+
+/* ---- Global Typography ---- */
+.page-title {
+  font-size: 3.25rem;
+  font-weight: 900;
+  color: var(--color-nhl-black, #000);
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 4.25rem;
+  }
+}
