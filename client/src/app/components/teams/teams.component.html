@@ -22,10 +22,10 @@
             <h3 class="division-title">{{ group.divisionName }} Division</h3>
             <div class="teams-grid">
               @for (team of group.teams; track team.id) {
-                <div class="team-card" [style.background-color]="team.primaryColor">
+                <a class="team-card" [style.background-color]="team.primaryColor" [routerLink]="['/teams', team.id]">
                   <img [src]="team.logo" [alt]="team.fullName" class="team-card-logo">
                   <span class="team-card-name">{{ team.fullName }}</span>
-                </div>
+                </a>
               }
             </div>
           </div>

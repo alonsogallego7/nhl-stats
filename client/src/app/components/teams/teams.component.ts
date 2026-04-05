@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TeamsService } from '../../services/teams/teams.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LoadingComponent } from '../loading/loading.component';
@@ -7,7 +8,7 @@ import { LoadingComponent } from '../loading/loading.component';
 @Component({
   selector: 'app-teams',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, LoadingComponent],
+  imports: [CommonModule, RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './teams.component.html',
   styleUrl: './teams.component.css'
 })

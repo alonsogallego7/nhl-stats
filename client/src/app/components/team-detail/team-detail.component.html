@@ -1,0 +1,170 @@
+<div class="td-page">
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  @if (error || !team) {
+    <div class="td-error">Team not found.</div>
+  } @else {
+
+  <div class="td-content">
+
+    <!-- ── HEADER ── -->
+    <div class="td-header">
+      <button (click)="goBack()" class="td-back">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back</span>
+      </button>
+
+      <div class="td-header-main">
+
+        <!-- Logo -->
+        <div class="td-logo-wrap" [style.background-color]="team.primaryColor">
+          <img [src]="team.logo" [alt]="team.fullName" class="td-logo" />
+        </div>
+
+        <!-- Identity -->
+        <div class="td-identity">
+          <h1 class="td-name">{{ team.fullName }}</h1>
+          <div class="td-meta-row">
+            <span class="td-badge">{{ team.conference }} Conference</span>
+            <span class="td-sep">·</span>
+            <span class="td-badge">{{ team.division }} Division</span>
+          </div>
+          <div class="td-quick-info">
+            <span>{{ totalPlayers }} players on roster</span>
+            <span class="sep">·</span>
+            <span>{{ forwards.length }} Forwards</span>
+            <span class="sep">·</span>
+            <span>{{ defensemen.length }} Defensemen</span>
+            <span class="sep">·</span>
+            <span>{{ goalies.length }} Goalies</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ROSTER ── -->
+    <div class="td-grid">
+
+      <!-- Forwards -->
+      @if (forwards.length) {
+      <div class="td-panel td-panel-full">
+        <h3 class="td-panel-title">Forwards</h3>
+        <table class="td-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th>Shoots</th>
+              <th>Height</th>
+              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th>Born</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of forwards; track p.id) {
+              <tr class="td-tr" [routerLink]="playerRoute(p)">
+                <td class="td-num">{{ p.sweaterNumber }}</td>
+                <td class="td-player-cell">
+                  <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
+                  <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
+                </td>
+                <td><span class="td-pos-badge">{{ positionLabel(p.positionCode) }}</span></td>
+                <td>{{ p.shootsCatches }}</td>
+                <td>{{ p.heightInCentimeters }} cm</td>
+                <td>{{ p.weightInPounds }} lbs</td>
+                <td>{{ formatBirthDate(p.birthDate) }}</td>
+                <td>{{ p.birthCountry }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+      <!-- Defensemen -->
+      @if (defensemen.length) {
+      <div class="td-panel td-panel-full">
+        <h3 class="td-panel-title">Defensemen</h3>
+        <table class="td-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th>Shoots</th>
+              <th>Height</th>
+              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th>Born</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of defensemen; track p.id) {
+              <tr class="td-tr" [routerLink]="playerRoute(p)">
+                <td class="td-num">{{ p.sweaterNumber }}</td>
+                <td class="td-player-cell">
+                  <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
+                  <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
+                </td>
+                <td><span class="td-pos-badge td-pos-d">{{ positionLabel(p.positionCode) }}</span></td>
+                <td>{{ p.shootsCatches }}</td>
+                <td>{{ p.heightInCentimeters }} cm</td>
+                <td>{{ p.weightInPounds }} lbs</td>
+                <td>{{ formatBirthDate(p.birthDate) }}</td>
+                <td>{{ p.birthCountry }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+      <!-- Goalies -->
+      @if (goalies.length) {
+      <div class="td-panel td-panel-full">
+        <h3 class="td-panel-title">Goalies</h3>
+        <table class="td-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th>Catches</th>
+              <th>Height</th>
+              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th>Born</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of goalies; track p.id) {
+              <tr class="td-tr" [routerLink]="playerRoute(p)">
+                <td class="td-num">{{ p.sweaterNumber }}</td>
+                <td class="td-player-cell">
+                  <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
+                  <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
+                </td>
+                <td><span class="td-pos-badge td-pos-g">{{ positionLabel(p.positionCode) }}</span></td>
+                <td>{{ p.shootsCatches }}</td>
+                <td>{{ p.heightInCentimeters }} cm</td>
+                <td>{{ p.weightInPounds }} lbs</td>
+                <td>{{ formatBirthDate(p.birthDate) }}</td>
+                <td>{{ p.birthCountry }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+    </div><!-- end td-grid -->
+  </div><!-- end td-content -->
+  }
+  }<!-- end !isLoading -->
+</div>

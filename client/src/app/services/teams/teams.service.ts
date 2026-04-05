@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, shareReplay } from 'rxjs';
+import { Observable, shareReplay, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,15 @@ export class TeamsService {
       );
     }
     return this.teamsCache$;
+  }
+
+  getTeamByAbbrev(abbrev: string): Observable<any> {
+    return this.getTeams().pipe(
+      map((teams: any[]) => teams.find(t => t.id === abbrev.toUpperCase()) || null)
+    );
+  }
+
+  getRoster(triCode: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/teams/${triCode.toUpperCase()}`);
   }
 }

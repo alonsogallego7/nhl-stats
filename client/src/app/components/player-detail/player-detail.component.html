@@ -12,10 +12,10 @@
 
     <!-- ── TOP HEADER ── -->
     <div class="pd-header">
-      <a routerLink="/players" class="pd-back">
+      <button (click)="goBack()" class="pd-back">
         <span class="material-symbols-outlined">arrow_back</span>
-        <span>Players</span>
-      </a>
+        <span>Back</span>
+      </button>
 
       <div class="pd-header-main">
 
@@ -205,7 +205,7 @@
             }
           </tbody>
           } @else {
-          <thead><tr><th>Date</th><th>Opponent</th><th class="pd-th-tip" data-tooltip="Goals">G</th><th class="pd-th-tip" data-tooltip="Assists">A</th><th class="pd-th-tip" data-tooltip="Points">PTS</th><th class="pd-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="pd-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="pd-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="pd-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="pd-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="pd-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
           <tbody>
             @for (g of player.last5Games; track g.gameId) {
             <tr>

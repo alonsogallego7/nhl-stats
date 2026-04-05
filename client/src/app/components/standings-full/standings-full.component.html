@@ -41,15 +41,15 @@
                           <th class="th-pos">#</th>
                           <th class="th-team">Team</th>
                           <th class="th-stat" title="Games Played">GP</th>
-                          <th class="th-stat" title="Wins">W</th>
-                          <th class="th-stat" title="Losses">L</th>
+                          <th class="th-stat" title="Wins">Wins</th>
+                          <th class="th-stat" title="Losses">Losses</th>
                           <th class="th-stat" title="Overtime/Shootout Losses">OTL</th>
-                          <th class="th-pts" title="Points">PTS</th>
+                          <th class="th-pts" title="Points">Points</th>
                         </tr>
                       </thead>
                       <tbody>
                         @for (team of div.teams; track team.teamAbbrev.default; let i = $index) {
-                          <tr class="tbody-row">
+                          <tr class="tbody-row" [routerLink]="['/teams', team.teamAbbrev.default]" style="cursor: pointer;">
                             <!-- Position -->
                             <td class="td-pos">
                               <span class="pos-num">{{ i + 1 }}</span>

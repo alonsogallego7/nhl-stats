@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlayersService } from '../../services/players/players.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LoadingComponent } from '../loading/loading.component';
@@ -8,7 +8,7 @@ import { LoadingComponent } from '../loading/loading.component';
 @Component({
   selector: 'app-player-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent, LoadingComponent],
+  imports: [CommonModule, NavbarComponent, LoadingComponent],
   templateUrl: './player-detail.component.html',
   styleUrl: './player-detail.component.css'
 })
@@ -19,7 +19,9 @@ export class PlayerDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private playersService: PlayersService
+    private playersService: PlayersService,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,6 +36,14 @@ export class PlayerDetailComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  goBack() {
+    if (window.history.length > 2) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/players']);
+    }
   }
 
   get currentNHLSeason() {

@@ -4,11 +4,13 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { PlayersComponent } from './components/players/players.component';
 import { PlayerDetailComponent } from './components/player-detail/player-detail.component';
 import { StandingsFullComponent } from './components/standings-full/standings-full.component';
+import { TeamDetailComponent } from './components/team-detail/team-detail.component';
 
 export const routes: Routes = [
   { path: '', component: MainViewComponent },
   { path: 'standings', component: StandingsFullComponent },
   { path: 'teams', component: TeamsComponent },
+  { path: 'teams/:abbrev', component: TeamDetailComponent },
   { path: 'players', component: PlayersComponent },
   { path: 'players/:id', component: PlayerDetailComponent }
 ];
