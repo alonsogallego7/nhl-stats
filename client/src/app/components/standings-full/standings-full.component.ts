@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StandingsService } from '../../services/standings/standings.service';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-standings-full',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, NavbarComponent, LoadingComponent],
   templateUrl: './standings-full.component.html',
   styleUrl: './standings-full.component.css'
 })
 export class StandingsFullComponent implements OnInit {
-  standings: any[] = [];
+  isLoading: boolean = true;
+
   conferences: {
     conferenceName: string;
     divisions: {
@@ -24,15 +28,19 @@ export class StandingsFullComponent implements OnInit {
     this.standingsService.getStandings().subscribe({
       next: (data) => {
         if (data && data.standings) {
-          this.standings = data.standings;
-          this.processStandings(this.standings);
+          this.processStandings(data.standings);
         }
+        this.isLoading = false;
       },
-      error: (err) => console.error('Error fetching standings:', err)
+      error: (err) => {
+        console.error('Error fetching standings:', err);
+        this.isLoading = false;
+      }
     });
   }
 
   processStandings(standings: any[]) {
+    const confOrder = ['Eastern', 'Western'];
     const confMap = new Map<string, Map<string, any[]>>();
 
     standings.forEach(team => {
@@ -49,17 +57,45 @@ export class StandingsFullComponent implements OnInit {
       divMap.get(divName)!.push(team);
     });
 
-    this.conferences = Array.from(confMap.entries()).map(([confName, divMap]) => {
-      return {
-        conferenceName: confName,
-        divisions: Array.from(divMap.entries()).map(([divName, teams]) => {
-          teams.sort((a, b) => a.divisionSequence - b.divisionSequence);
-          return {
-            divisionName: divName,
-            teams: teams
-          };
-        })
-      };
-    });
+    this.conferences = confOrder
+      .filter(c => confMap.has(c))
+      .map(confName => {
+        const divMap = confMap.get(confName)!;
+        return {
+          conferenceName: confName,
+          divisions: Array.from(divMap.entries()).map(([divName, teams]) => {
+            teams.sort((a, b) => a.divisionSequence - b.divisionSequence);
+            return { divisionName: divName, teams };
+          })
+        };
+      });
+  }
+
+  getL10(team: any): string {
+    return `${team.l10Wins}-${team.l10Losses}-${team.l10OtLosses}`;
+  }
+
+  getStreak(team: any): string {
+    return `${team.streakCode}${team.streakCount}`;
+  }
+
+  getStreakClass(team: any): string {
+    if (team.streakCode === 'W') return 'streak-win';
+    if (team.streakCode === 'L') return 'streak-loss';
+    return 'streak-ot';
+  }
+
+  getDiffClass(diff: number): string {
+    if (diff > 0) return 'diff-pos';
+    if (diff < 0) return 'diff-neg';
+    return 'diff-even';
+  }
+
+  formatDiff(diff: number): string {
+    return diff > 0 ? `+${diff}` : `${diff}`;
+  }
+
+  formatPctg(pctg: number): string {
+    return pctg.toFixed(3).replace('0.', '.');
   }
 }

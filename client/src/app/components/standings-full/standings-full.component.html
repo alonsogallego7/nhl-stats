@@ -1,70 +1,92 @@
-<div class="standings-wrapper">
-  @for (conf of conferences; track conf.conferenceName) {
-    <div class="conference-box">
-      <!-- Conference Title -->
-      <div class="conference-header">
-        <h3 class="conference-title">
-          {{ conf.conferenceName }} Conference
-        </h3>
-      </div>
-      
-      <!-- Division Grid -->
-      <div class="division-container">
-        <div class="division-grid">
-          @for (div of conf.divisions; track div.divisionName) {
-            <div class="division-card">
-              <div class="division-header">
-                <h4 class="division-title">
-                  {{ div.divisionName }} Division
-                </h4>
-              </div>
-              
-              <div class="table-container">
-                <table class="standings-table">
-                  <thead>
-                    <tr>
-                      <th class="th-pos">Pos</th>
-                      <th class="th-team">Team</th>
-                      <th class="th-pts">Pts</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @for (team of div.teams; track team.teamAbbrev.default; let i = $index) {
-                      <tr class="table-row">
-                        <td class="td-pos">
-                          <span class="pos-num">{{ i + 1 }}</span>
-                        </td>
-                        <td class="td-team">
-                          <div class="team-cell">
-                            <img [src]="team.teamLogo" class="team-logo" [alt]="team.teamAbbrev.default">
-                            <div class="team-names">
-                              <span class="team-name-full">{{ team.teamName.default }}</span>
-                              <span class="team-name-short">{{ team.teamAbbrev.default }}</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="td-pts">
-                          <span class="pts-num">{{ team.points }}</span>
-                        </td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-    </div>
-  }
+<div class="standings-page">
 
-  @if (conferences.length === 0) {
-    <div class="loading-box">
-      <svg class="loading-icon" fill="none" viewBox="0 0 24 24">
-        <circle class="loading-track" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="loading-spinner" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span class="loading-text">Fetching standings...</span>
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  <div class="standings-content">
+    <div class="standings-inner">
+
+      <!-- Title -->
+      <div class="standings-title-section">
+        <h2 class="page-title">Standings</h2>
+      </div>
+
+      <!-- Conferences -->
+      <div class="conferences-wrapper">
+        @for (conf of conferences; track conf.conferenceName) {
+          <div class="conference-block">
+
+            <!-- Conference Header -->
+            <div class="conference-header">
+              <span class="conference-name">{{ conf.conferenceName }} Conference</span>
+            </div>
+
+            <!-- Divisions Grid -->
+            <div class="divisions-grid">
+              @for (div of conf.divisions; track div.divisionName) {
+                <div class="division-block">
+
+                  <!-- Division Header -->
+                  <div class="division-header">
+                    <span class="division-name">{{ div.divisionName }} Division</span>
+                  </div>
+
+                  <!-- Stats Table -->
+                  <div class="table-wrapper">
+                    <table class="standings-table">
+                      <thead>
+                        <tr class="thead-row">
+                          <th class="th-pos">#</th>
+                          <th class="th-team">Team</th>
+                          <th class="th-stat" title="Games Played">GP</th>
+                          <th class="th-stat" title="Wins">W</th>
+                          <th class="th-stat" title="Losses">L</th>
+                          <th class="th-stat" title="Overtime/Shootout Losses">OTL</th>
+                          <th class="th-pts" title="Points">PTS</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (team of div.teams; track team.teamAbbrev.default; let i = $index) {
+                          <tr class="tbody-row">
+                            <!-- Position -->
+                            <td class="td-pos">
+                              <span class="pos-num">{{ i + 1 }}</span>
+                            </td>
+
+                            <!-- Team -->
+                            <td class="td-team">
+                              <div class="team-cell">
+                                <img [src]="team.teamLogo" [alt]="team.teamAbbrev.default" class="team-logo">
+                                <div class="team-names">
+                                  <span class="team-full">{{ team.teamName.default }}</span>
+                                  <span class="team-abbrev">{{ team.teamAbbrev.default }}</span>
+                                </div>
+                              </div>
+                            </td>
+
+                            <!-- Stats -->
+                            <td class="td-stat">{{ team.gamesPlayed }}</td>
+                            <td class="td-stat">{{ team.wins }}</td>
+                            <td class="td-stat">{{ team.losses }}</td>
+                            <td class="td-stat">{{ team.otLosses }}</td>
+                            <td class="td-stat td-pts">{{ team.points }}</td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div><!-- /table-wrapper -->
+
+                </div>
+              }
+            </div>
+
+          </div>
+        }
+      </div><!-- /conferences-wrapper -->
+
     </div>
+  </div>
   }
 </div>

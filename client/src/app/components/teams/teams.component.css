@@ -2,7 +2,6 @@
   min-height: 100vh;
   background-color: var(--color-nhl-white);
   color: var(--color-nhl-black);
-  font-family: sans-serif;
   display: flex;
   flex-direction: column;
 }
