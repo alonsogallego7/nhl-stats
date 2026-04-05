@@ -1,44 +1,8 @@
-/* ---- Page Shell ---- */
-.standings-page {
-  min-height: 100vh;
-  background-color: var(--color-nhl-white);
-  color: var(--color-nhl-black);
-  display: flex;
-  flex-direction: column;
-}
-
-/* ---- Content Area ---- */
-.standings-content {
-  flex: 1;
-  width: 100%;
-}
-
-.standings-inner {
-  width: 100%;
-  max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-  .standings-inner {
-    padding: 0 2rem;
-  }
-}
-
-/* ---- Title ---- */
-.standings-title-section {
-  padding-top: 1.5rem;
-  padding-bottom: 2rem;
-}
-
 /* ---- Conferences ---- */
 .conferences-wrapper {
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  padding-bottom: 5rem;
 }
 
 /* ---- Conference Block ---- */
@@ -123,18 +87,18 @@
 }
 
 .th-pos {
-  padding: 0.65rem 0.5rem 0.65rem 1rem;
-  width: 2.2rem;
+  padding: 0.65rem 0.5rem 0.65rem 0.5rem;
+  width: 45px;
   text-align: center;
 }
 
 .th-team {
-  padding: 0.65rem 0.75rem;
-  min-width: 110px;
+  padding: 0.65rem 0.35rem;
+  width: 40%;
 }
 
 .th-stat {
-  padding: 0.65rem 0.75rem;
+  padding: 0.65rem 0.35rem;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -142,12 +106,16 @@
 }
 
 .th-pts {
-  padding: 0.65rem 0.75rem;
+  padding: 0.65rem 0.35rem;
+  width: 90px;
   text-align: center;
   color: #050505;
   font-weight: 900;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Body rows */
@@ -162,7 +130,7 @@
 
 /* Cells */
 .td-pos {
-  padding: 0.85rem 0.5rem 0.85rem 1rem;
+  padding: 0.85rem 0.5rem 0.85rem 0.5rem;
   text-align: center;
 }
 
@@ -216,7 +184,7 @@
 
 /* Stat cells */
 .td-stat {
-  padding: 0.85rem 0.75rem;
+  padding: 0.85rem 0.35rem;
   text-align: center;
   font-size: 0.85rem;
   font-weight: 600;

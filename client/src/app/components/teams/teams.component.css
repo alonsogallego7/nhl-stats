@@ -1,44 +1,8 @@
-.teams-page {
-  min-height: 100vh;
-  background-color: var(--color-nhl-white);
-  color: var(--color-nhl-black);
-  display: flex;
-  flex-direction: column;
-}
-
-/* ---- Content ---- */
-.teams-content {
-  flex: 1;
-  width: 100%;
-}
-
-.teams-inner {
-  width: 100%;
-  max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 768px) {
-  .teams-inner {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-.teams-title-section {
-  padding-top: 1.5rem;
-  padding-bottom: 2rem;
-}
-
 /* ---- Divisions ---- */
 .teams-divisions {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding-bottom: 4rem;
 }
 
 .division-section {

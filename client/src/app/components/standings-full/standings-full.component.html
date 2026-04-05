@@ -1,15 +1,15 @@
-<div class="standings-page">
+<div class="nhl-page">
 
   <app-loading [isLoading]="isLoading"></app-loading>
 
   @if (!isLoading) {
   <app-navbar></app-navbar>
 
-  <div class="standings-content">
-    <div class="standings-inner">
+  <div class="nhl-content">
+    <div class="nhl-inner">
 
       <!-- Title -->
-      <div class="standings-title-section">
+      <div class="nhl-title-section">
         <h2 class="page-title">Standings</h2>
       </div>
 
@@ -41,8 +41,8 @@
                           <th class="th-pos">#</th>
                           <th class="th-team">Team</th>
                           <th class="th-stat" title="Games Played">GP</th>
-                          <th class="th-stat" title="Wins">Wins</th>
-                          <th class="th-stat" title="Losses">Losses</th>
+                          <th class="th-stat" title="Wins">W</th>
+                          <th class="th-stat" title="Losses">L</th>
                           <th class="th-stat" title="Overtime/Shootout Losses">OTL</th>
                           <th class="th-pts" title="Points">Points</th>
                         </tr>

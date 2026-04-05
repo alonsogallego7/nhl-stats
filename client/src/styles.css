@@ -181,3 +181,174 @@ img, video {
     font-size: 4.25rem;
   }
 }
+
+/* ---- Shared Application Layout ---- */
+
+/* Page Shell */
+.nhl-page {
+  min-height: 100vh;
+  background-color: var(--color-nhl-white, #fff);
+  color: var(--color-nhl-black, #000);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content Area */
+.nhl-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Inner Container */
+.nhl-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .nhl-inner { padding: 0 2rem 4rem; }
+}
+
+/* Specific Wrapper without bottom padding */
+.nhl-inner--compact {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .nhl-inner--compact { padding: 0 2.5rem 4rem; }
+}
+
+/* Title Section */
+.nhl-title-section {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Back Link */
+.nhl-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #555;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nhl-back .material-symbols-outlined {
+  font-size: 1.6rem;
+}
+
+.nhl-back:hover {
+  color: #000;
+  transform: translateX(-4px);
+}
+
+/* Panel Header */
+.nhl-panel-title {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.55rem 0.85rem;
+  background: #000;
+  color: #fff;
+  margin: 0;
+}
+
+/* Error States */
+.nhl-error {
+  padding: 4rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Global Tables */
+.nhl-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.82rem;
+  font-family: inherit;
+}
+
+.nhl-table th {
+  background: #f8f8f8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  color: #666;
+  border-bottom: 1px solid #e8e8e8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nhl-table td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid #f2f2f2;
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nhl-table tr:hover td { background: #fafafa; }
+.nhl-table tr:last-child td { border-bottom: none; }
+
+/* CSS Tooltip */
+.nhl-th-tip {
+  position: relative;
+  cursor: default;
+}
+
+.nhl-th-tip[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 10;
+  text-transform: none;
+}
+
+/* Position Badges */
+.nhl-pos-badge {
+  font-size: 0.62rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  background: #000;
+  color: #fff;
+}
+
+.nhl-pos-badge--d { background: #1d4ed8; }
+.nhl-pos-badge--g { background: #7c3aed; }

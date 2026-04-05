@@ -1,18 +1,18 @@
-<div class="td-page">
+<div class="nhl-page">
   <app-loading [isLoading]="isLoading"></app-loading>
 
   @if (!isLoading) {
   <app-navbar></app-navbar>
 
   @if (error || !team) {
-    <div class="td-error">Team not found.</div>
+    <div class="nhl-error">Team not found.</div>
   } @else {
 
-  <div class="td-content">
+  <div class="nhl-content nhl-inner--compact">
 
     <!-- ── HEADER ── -->
     <div class="td-header">
-      <button (click)="goBack()" class="td-back">
+      <button (click)="goBack()" class="nhl-back">
         <span class="material-symbols-outlined">arrow_back</span>
         <span>Back</span>
       </button>
@@ -52,16 +52,16 @@
       <!-- Forwards -->
       @if (forwards.length) {
       <div class="td-panel td-panel-full">
-        <h3 class="td-panel-title">Forwards</h3>
-        <table class="td-table">
+        <h3 class="nhl-panel-title">Forwards</h3>
+        <table class="nhl-table td-table-specific">
           <thead>
             <tr>
               <th>#</th>
               <th>Player</th>
-              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th class="nhl-th-tip" data-tooltip="Position">Pos</th>
               <th>Shoots</th>
               <th>Height</th>
-              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th class="nhl-th-tip" data-tooltip="Weight (lbs)">Wt</th>
               <th>Born</th>
               <th>Country</th>
             </tr>
@@ -74,7 +74,7 @@
                   <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
                   <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
                 </td>
-                <td><span class="td-pos-badge">{{ positionLabel(p.positionCode) }}</span></td>
+                <td><span class="nhl-pos-badge">{{ positionLabel(p.positionCode) }}</span></td>
                 <td>{{ p.shootsCatches }}</td>
                 <td>{{ p.heightInCentimeters }} cm</td>
                 <td>{{ p.weightInPounds }} lbs</td>
@@ -90,16 +90,16 @@
       <!-- Defensemen -->
       @if (defensemen.length) {
       <div class="td-panel td-panel-full">
-        <h3 class="td-panel-title">Defensemen</h3>
-        <table class="td-table">
+        <h3 class="nhl-panel-title">Defensemen</h3>
+        <table class="nhl-table td-table-specific">
           <thead>
             <tr>
               <th>#</th>
               <th>Player</th>
-              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th class="nhl-th-tip" data-tooltip="Position">Pos</th>
               <th>Shoots</th>
               <th>Height</th>
-              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th class="nhl-th-tip" data-tooltip="Weight (lbs)">Wt</th>
               <th>Born</th>
               <th>Country</th>
             </tr>
@@ -112,7 +112,7 @@
                   <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
                   <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
                 </td>
-                <td><span class="td-pos-badge td-pos-d">{{ positionLabel(p.positionCode) }}</span></td>
+                <td><span class="nhl-pos-badge nhl-pos-badge--d">{{ positionLabel(p.positionCode) }}</span></td>
                 <td>{{ p.shootsCatches }}</td>
                 <td>{{ p.heightInCentimeters }} cm</td>
                 <td>{{ p.weightInPounds }} lbs</td>
@@ -128,16 +128,16 @@
       <!-- Goalies -->
       @if (goalies.length) {
       <div class="td-panel td-panel-full">
-        <h3 class="td-panel-title">Goalies</h3>
-        <table class="td-table">
+        <h3 class="nhl-panel-title">Goalies</h3>
+        <table class="nhl-table td-table-specific">
           <thead>
             <tr>
               <th>#</th>
               <th>Player</th>
-              <th class="td-th-tip" data-tooltip="Position">Pos</th>
+              <th class="nhl-th-tip" data-tooltip="Position">Pos</th>
               <th>Catches</th>
               <th>Height</th>
-              <th class="td-th-tip" data-tooltip="Weight (lbs)">Wt</th>
+              <th class="nhl-th-tip" data-tooltip="Weight (lbs)">Wt</th>
               <th>Born</th>
               <th>Country</th>
             </tr>
@@ -150,7 +150,7 @@
                   <img [src]="p.headshot" [alt]="p.firstName.default + ' ' + p.lastName.default" class="td-headshot" />
                   <span class="td-player-name">{{ p.firstName.default }} {{ p.lastName.default }}</span>
                 </td>
-                <td><span class="td-pos-badge td-pos-g">{{ positionLabel(p.positionCode) }}</span></td>
+                <td><span class="nhl-pos-badge nhl-pos-badge--g">{{ positionLabel(p.positionCode) }}</span></td>
                 <td>{{ p.shootsCatches }}</td>
                 <td>{{ p.heightInCentimeters }} cm</td>
                 <td>{{ p.weightInPounds }} lbs</td>

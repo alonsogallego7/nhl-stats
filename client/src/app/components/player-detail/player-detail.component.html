@@ -1,18 +1,18 @@
-<div class="pd-page">
+<div class="nhl-page">
   <app-loading [isLoading]="isLoading"></app-loading>
 
   @if (!isLoading) {
   <app-navbar></app-navbar>
 
   @if (error || !player) {
-    <div class="pd-error">Player not found.</div>
+    <div class="nhl-error">Player not found.</div>
   } @else {
 
-  <div class="pd-content">
+  <div class="nhl-content nhl-inner--compact">
 
     <!-- ── TOP HEADER ── -->
     <div class="pd-header">
-      <button (click)="goBack()" class="pd-back">
+      <button (click)="goBack()" class="nhl-back">
         <span class="material-symbols-outlined">arrow_back</span>
         <span>Back</span>
       </button>
@@ -31,7 +31,7 @@
             <h1 class="pd-name">{{ player.firstName?.default }} {{ player.lastName?.default }}</h1>
           </div>
           <div class="pd-meta-row">
-            <span class="pd-position-badge">{{ positionFull(player.position) }}</span>
+            <span class="nhl-pos-badge">{{ positionFull(player.position) }}</span>
             <img [src]="player.teamLogo" [alt]="player.currentTeamAbbrev" class="pd-team-logo" />
             <span class="pd-team-name">{{ player.fullTeamName?.default }}</span>
           </div>
@@ -54,7 +54,7 @@
 
       <!-- PERSONAL INFO (wide panel with 3 sections) -->
       <div class="pd-panel pd-panel-full">
-        <h3 class="pd-panel-title">Player Info</h3>
+        <h3 class="nhl-panel-title">Player Info</h3>
         <div class="pd-info-cols">
 
           <!-- Biography -->
@@ -99,7 +99,7 @@
       <!-- GOALIE SEASON STATS -->
       @if (player.position === 'G' && currentNHLSeason) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">This Season — Regular</h3>
+        <h3 class="nhl-panel-title">This Season — Regular</h3>
         <div class="pd-stat-grid">
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.wins }}</span><span class="pd-stat-lbl" data-tooltip="Wins">Wins</span></div>
@@ -115,7 +115,7 @@
       <!-- GOALIE CAREER STATS -->
       @if (player.position === 'G' && careerRegular) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">Career — Regular Season</h3>
+        <h3 class="nhl-panel-title">Career — Regular Season</h3>
         <div class="pd-stat-grid">
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesStarted }}</span><span class="pd-stat-lbl" data-tooltip="Games Started">Starts</span></div>
@@ -133,7 +133,7 @@
       <!-- SKATER THIS SEASON -->
       @if (player.position !== 'G' && currentNHLSeason) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">This Season — Regular</h3>
+        <h3 class="nhl-panel-title">This Season — Regular</h3>
         <div class="pd-stat-grid">
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
@@ -149,7 +149,7 @@
       <!-- SKATER CAREER REGULAR -->
       @if (player.position !== 'G' && careerRegular) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">Career — Regular Season</h3>
+        <h3 class="nhl-panel-title">Career — Regular Season</h3>
         <div class="pd-stat-grid">
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
@@ -165,7 +165,7 @@
       <!-- SKATER CAREER PLAYOFFS -->
       @if (player.position !== 'G' && careerPlayoffs) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">Career — Playoffs</h3>
+        <h3 class="nhl-panel-title">Career — Playoffs</h3>
         <div class="pd-stat-grid">
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.gamesPlayed }}</span><span class="pd-stat-lbl" data-tooltip="Games Played">Games</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
@@ -181,10 +181,10 @@
       <!-- LAST 5 GAMES -->
       @if (player.last5Games?.length) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">Last 5 Games</h3>
-        <table class="pd-table">
+        <h3 class="nhl-panel-title">Last 5 Games</h3>
+        <table class="nhl-table">
           @if (player.position === 'G') {
-          <thead><tr><th>Date</th><th>Opponent</th><th class="pd-th-tip" data-tooltip="Decision (Win/Loss/Overtime)">Dec</th><th class="pd-th-tip" data-tooltip="Goals Against">GA</th><th class="pd-th-tip" data-tooltip="Shots Against">SA</th><th class="pd-th-tip" data-tooltip="Save Percentage">SV%</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <thead><tr><th>Date</th><th>Opponent</th><th class="nhl-th-tip" data-tooltip="Decision (Win/Loss/Overtime)">Dec</th><th class="nhl-th-tip" data-tooltip="Goals Against">GA</th><th class="nhl-th-tip" data-tooltip="Shots Against">SA</th><th class="nhl-th-tip" data-tooltip="Save Percentage">SV%</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
           <tbody>
             @for (g of player.last5Games; track g.gameId) {
             <tr>
@@ -205,7 +205,7 @@
             }
           </tbody>
           } @else {
-          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="pd-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="pd-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="pd-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="pd-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="nhl-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="nhl-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="nhl-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
           <tbody>
             @for (g of player.last5Games; track g.gameId) {
             <tr>
@@ -235,7 +235,7 @@
       <!-- AWARDS -->
       @if (player.awards?.length) {
       <div class="pd-panel pd-panel-wide">
-        <h3 class="pd-panel-title">Awards</h3>
+        <h3 class="nhl-panel-title">Awards</h3>
         <div class="pd-awards">
           @for (award of player.awards; track award.trophy.default) {
           <div class="pd-award-item">

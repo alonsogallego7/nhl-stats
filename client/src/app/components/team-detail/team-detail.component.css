@@ -1,11 +1,4 @@
-/* ── Page Shell ── */
-.td-page {
-  min-height: 100vh;
-  background-color: var(--color-nhl-white, #fff);
-  color: #000;
-  display: flex;
-  flex-direction: column;
-}
+/* ── Specific Styles ── */
 
 .td-error {
   padding: 4rem;
@@ -13,37 +6,6 @@
   font-weight: 700;
   font-size: 1.25rem;
 }
-
-/* ── Content Wrapper ── */
-.td-content {
-  flex: 1;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-}
-
-@media (min-width: 768px) {
-  .td-content { padding: 0 2.5rem 4rem; }
-}
-
-/* ── Back Link ── */
-.td-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 1.25rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #555;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.td-back .material-symbols-outlined { font-size: 1.6rem; }
-.td-back:hover { color: #000; transform: translateX(-4px); }
 
 /* ── Header ── */
 .td-header {
@@ -144,57 +106,20 @@
 
 .td-panel-full { width: 100%; }
 
-.td-panel-title {
-  font-size: 0.65rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  padding: 0.55rem 0.85rem;
-  background: #000;
-  color: #fff;
-  margin: 0;
-}
+/* ── Roster Table Overrides ── */
 
-/* ── Roster Table ── */
-.td-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.82rem;
-  table-layout: fixed;
-}
-
-.td-table th {
-  background: #f8f8f8;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  padding: 0.55rem 0.85rem;
-  text-align: left;
-  color: #666;
-  border-bottom: 1px solid #e8e8e8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.td-table td {
-  padding: 0.5rem 0.85rem;
-  border-bottom: 1px solid #f2f2f2;
-  font-weight: 500;
-  color: #111;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.td-table-specific th:nth-child(1) { width: 45px; }   /* # */
+.td-table-specific th:nth-child(2) { width: 260px; }  /* Player */
+.td-table-specific th:nth-child(3) { width: 60px; }   /* Pos */
+.td-table-specific th:nth-child(4) { width: 75px; }   /* Shoots */
+.td-table-specific th:nth-child(5) { width: 90px; }   /* Height */
+.td-table-specific th:nth-child(6) { width: 85px; }   /* Weight */
+.td-table-specific th:nth-child(7) { width: 140px; }  /* Born */
+.td-table-specific th:nth-child(8) { width: 120px; }  /* Country */
 
 .td-tr {
   cursor: pointer;
-  transition: background 0.1s;
 }
-
-.td-tr:hover td { background: #f5f5f5; }
-.td-table tr:last-child td { border-bottom: none; }
 
 /* Sweater number */
 .td-num {
@@ -240,53 +165,10 @@
   letter-spacing: 0.02em;
 }
 
-/* Position badges */
-.td-pos-badge {
-  font-size: 0.62rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.15rem 0.45rem;
-  background: #000;
-  color: #fff;
-}
-
-.td-pos-d {
-  background: #1d4ed8;
-}
-
-.td-pos-g {
-  background: #7c3aed;
-}
-
-/* Header tooltip */
-.td-th-tip {
-  position: relative;
-  cursor: default;
-}
-
-.td-th-tip[data-tooltip]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111;
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 600;
-  white-space: nowrap;
-  padding: 0.25rem 0.6rem;
-  border-radius: 3px;
-  pointer-events: none;
-  z-index: 10;
-  text-transform: none;
-}
-
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .td-table th:nth-child(n+5),
-  .td-table td:nth-child(n+5) {
+  .td-table-specific th:nth-child(n+5),
+  .td-table-specific td:nth-child(n+5) {
     display: none;
   }
 }

@@ -1,59 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
-.pd-page {
-  min-height: 100vh;
-  background-color: var(--color-nhl-white, #fff);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-}
-
-.pd-error {
-  padding: 4rem;
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-
-/* ─── CONTENT WRAPPER ─── */
-.pd-content {
-  flex: 1;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-}
-
-@media (min-width: 768px) {
-  .pd-content { padding: 0 2.5rem 4rem; }
-}
-
-/* ─── BACK LINK ─── */
-.pd-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 1.25rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #555;
-  text-decoration: none;
-  transition: all 0.2s;
-  border-bottom: none;
-}
-
-.pd-back .material-symbols-outlined {
-  font-size: 1.6rem;
-}
-
-.pd-back:hover {
-  color: #000;
-  transform: translateX(-4px); /* Slight bump left instead of scale */
-}
-
 /* ─── HEADER ─── */
 .pd-header {
   border-bottom: 2px solid #000;
@@ -121,16 +67,6 @@
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
-}
-
-.pd-position-badge {
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  background: #000;
-  color: #fff;
-  padding: 0.2rem 0.5rem;
 }
 
 .pd-team-logo {
@@ -212,17 +148,6 @@
   letter-spacing: 0.12em;
   color: #666; /* Oscurecido de #aaa */
   padding: 0.6rem 0.85rem 0.3rem;
-  margin: 0;
-}
-
-.pd-panel-title {
-  font-size: 0.65rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  padding: 0.55rem 0.85rem;
-  background: #000;
-  color: #fff;
   margin: 0;
 }
 
@@ -318,11 +243,6 @@
   z-index: 10;
   text-transform: none;
 }
-
-/* Goalie decision badges */
-.pd-decision-w { font-weight: 800; color: #16a34a; }
-.pd-decision-l { font-weight: 800; color: #dc2626; }
-.pd-decision-o { font-weight: 800; color: #d97706; }
 
 /* Table header tooltips */
 .pd-th-tip {
