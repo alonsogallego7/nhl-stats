@@ -72,31 +72,4 @@ export class StandingsFullComponent implements OnInit {
       });
   }
 
-  getL10(team: any): string {
-    return `${team.l10Wins}-${team.l10Losses}-${team.l10OtLosses}`;
-  }
-
-  getStreak(team: any): string {
-    return `${team.streakCode}${team.streakCount}`;
-  }
-
-  getStreakClass(team: any): string {
-    if (team.streakCode === 'W') return 'streak-win';
-    if (team.streakCode === 'L') return 'streak-loss';
-    return 'streak-ot';
-  }
-
-  getDiffClass(diff: number): string {
-    if (diff > 0) return 'diff-pos';
-    if (diff < 0) return 'diff-neg';
-    return 'diff-even';
-  }
-
-  formatDiff(diff: number): string {
-    return diff > 0 ? `+${diff}` : `${diff}`;
-  }
-
-  formatPctg(pctg: number): string {
-    return pctg.toFixed(3).replace('0.', '.');
-  }
 }
