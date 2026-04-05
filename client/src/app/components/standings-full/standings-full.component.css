@@ -157,15 +157,6 @@
   background-color: #f9fafb;
 }
 
-.tbody-row.clinched {
-  border-left: 3px solid #16a34a;
-}
-
-.tbody-row.eliminated {
-  border-left: 3px solid #dc2626;
-  opacity: 0.65;
-}
-
 /* Cells */
 .td-pos {
   padding: 0.85rem 0.5rem 0.85rem 1rem;
@@ -220,26 +211,6 @@
   letter-spacing: 0.06em;
 }
 
-/* Clinch badge */
-.clinch-badge {
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-}
-
-.clinch-x {
-  background-color: #dcfce7;
-  color: #15803d;
-}
-
-.clinch-e {
-  background-color: #fee2e2;
-  color: #b91c1c;
-}
-
 /* Stat cells */
 .td-stat {
   padding: 0.85rem 0.75rem;
@@ -254,46 +225,6 @@
   font-size: 0.9rem;
   font-weight: 900;
   color: #050505;
-}
-
-/* Goal differential */
-.diff-pos {
-  color: #16a34a;
-  font-weight: 700;
-}
-
-.diff-neg {
-  color: #dc2626;
-  font-weight: 700;
-}
-
-.diff-even {
-  color: #9ca3af;
-}
-
-/* Streak badge */
-.streak-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 900;
-  padding: 2px 7px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.streak-win {
-  background-color: #dcfce7;
-  color: #15803d;
-}
-
-.streak-loss {
-  background-color: #fee2e2;
-  color: #b91c1c;
-}
-
-.streak-ot {
-  background-color: #fff7ed;
-  color: #c2410c;
 }
 
 /* ---- Responsive ---- */

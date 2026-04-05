@@ -13,7 +13,6 @@ import { LoadingComponent } from '../loading/loading.component';
   styleUrl: './teams.component.css'
 })
 export class TeamsComponent implements OnInit {
-  teams: any[] = [];
   groupedTeams: { divisionName: string, teams: any[] }[] = [];
   isLoading: boolean = true;
 
@@ -22,8 +21,6 @@ export class TeamsComponent implements OnInit {
   ngOnInit() {
     this.teamsService.getTeams().subscribe({
       next: (data) => {
-        this.teams = data;
-        
         const groups: { [key: string]: any[] } = {};
         for (let team of data) {
           if (!groups[team.division]) {
