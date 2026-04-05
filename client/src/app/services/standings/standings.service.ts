@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class StandingsService {
 
   getStandings(): Observable<any> {
     if (!this.standings$) {
-      this.standings$ = this.http.get('http://localhost:3000/standings').pipe(
+      this.standings$ = this.http.get(`${environment.apiUrl}/standings`).pipe(
         shareReplay(1)
       );
     }

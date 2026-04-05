@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class PlayersService {
 
   getAllPlayers(): Observable<any[]> {
     if (!this.playersCache$) {
-      this.playersCache$ = this.http.get<any[]>('http://localhost:3000/players/all').pipe(
+      this.playersCache$ = this.http.get<any[]>(`${environment.apiUrl}/players/all`).pipe(
         shareReplay(1)
       );
     }
@@ -22,7 +23,7 @@ export class PlayersService {
 
   getPlayerById(id: number): Observable<any> {
     if (!this.playerDetailCache$.has(id)) {
-      const request$ = this.http.get<any>(`http://localhost:3000/players/player/${id}`).pipe(
+      const request$ = this.http.get<any>(`${environment.apiUrl}/players/player/${id}`).pipe(
         shareReplay(1)
       );
       this.playerDetailCache$.set(id, request$);

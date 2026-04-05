@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface StatLeader {
   id: number;
@@ -40,7 +41,7 @@ export interface TeamStatsResponse {
 })
 export class StatsService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiUrl;
   
   private leadersCache$: Observable<StatsResponse> | null = null;
   private teamLeadersCache$: Observable<TeamStatsResponse> | null = null;
