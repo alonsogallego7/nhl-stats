@@ -1,11 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StatsService, StatLeader, TeamLeader } from '../../services/stats/stats.service';
 
 @Component({
   selector: 'app-stats-preview',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './stats-preview.component.html',
   styleUrls: ['./stats-preview.component.css']
 })

@@ -1,20 +1,20 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, ViewChild, OnInit, inject } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { GamesService } from '../../services/games/games.service';
 
 @Component({
   selector: 'app-games',
-  imports: [CommonModule],
+  imports: [DatePipe],
   templateUrl: './games.component.html',
   styleUrl: './games.component.css'
 })
 export class GamesComponent implements OnInit {
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
 
+  private gamesService = inject(GamesService);
+
   games: any[] = [];
   isLoading: boolean = true;
-
-  constructor(private gamesService: GamesService) {}
 
   ngOnInit() {
     this.gamesService.getGames().subscribe({

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { TeamsService } from '../../services/teams/teams.service';
@@ -8,8 +8,7 @@ import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-team-detail',
-  standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent, LoadingComponent],
+  imports: [RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './team-detail.component.html',
   styleUrl: './team-detail.component.css'
 })
@@ -21,12 +20,10 @@ export class TeamDetailComponent implements OnInit {
   isLoading = true;
   error = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private teamsService: TeamsService,
-    private location: Location,
-    private router: Router
-  ) {}
+  private route = inject(ActivatedRoute);
+  private teamsService = inject(TeamsService);
+  private location = inject(Location);
+  private router = inject(Router);
 
   ngOnInit() {
     const abbrev = this.route.snapshot.paramMap.get('abbrev') || '';

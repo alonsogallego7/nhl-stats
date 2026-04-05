@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TeamsService } from '../../services/teams/teams.service';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -7,8 +6,7 @@ import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-teams',
-  standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent, LoadingComponent],
+  imports: [RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './teams.component.html',
   styleUrl: './teams.component.css'
 })
@@ -16,7 +14,7 @@ export class TeamsComponent implements OnInit {
   groupedTeams: { divisionName: string, teams: any[] }[] = [];
   isLoading: boolean = true;
 
-  constructor(private teamsService: TeamsService) {}
+  private teamsService = inject(TeamsService);
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe({

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PlayersService } from '../../services/players/players.service';
@@ -8,8 +7,7 @@ import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-players',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent, LoadingComponent],
+  imports: [FormsModule, RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './players.component.html',
   styleUrl: './players.component.css'
 })
@@ -18,7 +16,7 @@ export class PlayersComponent implements OnInit {
   isLoading: boolean = true;
   searchQuery: string = '';
 
-  constructor(private playersService: PlayersService) {}
+  private playersService = inject(PlayersService);
 
   ngOnInit() {
     this.playersService.getAllPlayers().subscribe({

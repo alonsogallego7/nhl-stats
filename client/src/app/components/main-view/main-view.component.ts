@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { GamesComponent } from '../games/games.component';
@@ -10,7 +10,6 @@ import { StatsService } from '../../services/stats/stats.service';
 
 @Component({
   selector: 'app-main-view',
-  standalone: true,
   imports: [GamesComponent, StatsPreviewComponent, NavbarComponent, RouterLink, LoadingComponent],
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.css'
@@ -18,10 +17,8 @@ import { StatsService } from '../../services/stats/stats.service';
 export class MainViewComponent implements OnInit {
   isLoading = true;
 
-  constructor(
-    private gamesService: GamesService,
-    private statsService: StatsService
-  ) {}
+  private gamesService = inject(GamesService);
+  private statsService = inject(StatsService);
 
   ngOnInit() {
     forkJoin([

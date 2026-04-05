@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlayersService } from '../../services/players/players.service';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -7,8 +7,7 @@ import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-player-detail',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent, LoadingComponent],
+  imports: [NavbarComponent, LoadingComponent],
   templateUrl: './player-detail.component.html',
   styleUrl: './player-detail.component.css'
 })
@@ -17,12 +16,10 @@ export class PlayerDetailComponent implements OnInit {
   isLoading = true;
   error = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private playersService: PlayersService,
-    private location: Location,
-    private router: Router
-  ) {}
+  private route = inject(ActivatedRoute);
+  private playersService = inject(PlayersService);
+  private location = inject(Location);
+  private router = inject(Router);
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));

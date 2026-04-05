@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StandingsService } from '../../services/standings/standings.service';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -7,8 +6,7 @@ import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-standings-full',
-  standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent, LoadingComponent],
+  imports: [RouterLink, NavbarComponent, LoadingComponent],
   templateUrl: './standings-full.component.html',
   styleUrl: './standings-full.component.css'
 })
@@ -23,7 +21,7 @@ export class StandingsFullComponent implements OnInit {
     }[];
   }[] = [];
 
-  constructor(private standingsService: StandingsService) {}
+  private standingsService = inject(StandingsService);
 
   ngOnInit() {
     this.standingsService.getStandings().subscribe({
