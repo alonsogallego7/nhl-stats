@@ -160,6 +160,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
+  table-layout: fixed;
 }
 
 .td-table th {
@@ -173,6 +174,8 @@
   color: #666;
   border-bottom: 1px solid #e8e8e8;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .td-table td {
@@ -181,6 +184,8 @@
   font-weight: 500;
   color: #111;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .td-tr {
@@ -196,9 +201,18 @@
   font-weight: 900;
   color: #bbb;
   font-size: 0.85rem;
-  width: 2.5rem;
-  text-align: center;
+  text-align: left;
 }
+
+/* Column Widths (Fixed Layout) */
+.td-table th:nth-child(1) { width: 45px; }   /* # */
+.td-table th:nth-child(2) { width: 260px; }  /* Player */
+.td-table th:nth-child(3) { width: 60px; }   /* Pos */
+.td-table th:nth-child(4) { width: 75px; }   /* Shoots */
+.td-table th:nth-child(5) { width: 90px; }   /* Height */
+.td-table th:nth-child(6) { width: 85px; }   /* Weight */
+.td-table th:nth-child(7) { width: 140px; }  /* Born */
+.td-table th:nth-child(8) { width: 120px; }  /* Country */
 
 /* Player cell: headshot + name */
 .td-player-cell {

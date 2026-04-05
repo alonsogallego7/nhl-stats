@@ -108,6 +108,7 @@
   width: 100%;
   text-align: left;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 /* Head row */
@@ -136,6 +137,8 @@
   padding: 0.65rem 0.75rem;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .th-pts {
@@ -219,6 +222,8 @@
   font-weight: 600;
   color: #374151;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .td-pts {
