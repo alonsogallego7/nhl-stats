@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LoadingComponent } from '../loading/loading.component';
@@ -16,6 +16,11 @@ export class GameCenterComponent implements OnInit {
   games: GameEvent[] = [];
 
   private gamesService = inject(GamesService);
+  private router = inject(Router);
+
+  goToGame(id: number) {
+    this.router.navigate(['/games', id]);
+  }
 
   ngOnInit() {
     this.gamesService.getGames().subscribe({

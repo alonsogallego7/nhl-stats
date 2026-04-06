@@ -1,0 +1,148 @@
+<div class="nhl-page">
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  @if (error || !gameData) {
+    <div class="nhl-error">Game not found or error loading data.</div>
+  } @else {
+
+  <div class="nhl-content nhl-inner">
+    
+    <!-- BACK BUTTON & HEADER -->
+    <button (click)="goBack()" class="nhl-back">
+      <span class="material-symbols-outlined">arrow_back</span>
+      <span>Back</span>
+    </button>
+
+    <div class="gd-header">
+      <div class="gd-header-main">
+        <!-- Away Team -->
+        <a [routerLink]="['/teams', gameData.awayTeam?.abbrev]" class="gd-team" style="text-decoration: none;">
+          <img [src]="gameData.awayTeam?.logo" [alt]="gameData.awayTeam?.abbrev" class="gd-logo" />
+          <span class="gd-team-abbrev">{{ gameData.awayTeam?.abbrev }}</span>
+        </a>
+
+        <!-- Score -->
+        <div class="gd-score-box">
+          <span class="gd-score">
+            {{ gameData.awayTeam?.score ?? '-' }}
+          </span>
+          <span class="gd-divider">-</span>
+          <span class="gd-score">
+            {{ gameData.homeTeam?.score ?? '-' }}
+          </span>
+        </div>
+
+        <!-- Home Team -->
+        <a [routerLink]="['/teams', gameData.homeTeam?.abbrev]" class="gd-team" style="text-decoration: none;">
+          <img [src]="gameData.homeTeam?.logo" [alt]="gameData.homeTeam?.abbrev" class="gd-logo" />
+          <span class="gd-team-abbrev">{{ gameData.homeTeam?.abbrev }}</span>
+        </a>
+      </div>
+
+      <div class="gd-state">
+        @if (gameData.gameState === 'FINAL' || gameData.gameState === 'OFF') {
+          FINAL
+        } @else if (gameData.gameState === 'LIVE' || gameData.gameState === 'CRIT') {
+          <div class="gd-live-badge">
+            <span class="gd-live-dot"></span> LIVE · {{ gameData.periodDescriptor?.number }} {{ gameData.periodDescriptor?.periodType }} · {{ gameData.clock?.timeRemaining }}
+          </div>
+        } @else {
+          {{ gameData.startTimeUTC | date:'longDate' }} · {{ gameData.periodDescriptor?.periodType === 'SO' ? 'Shootout' : (gameData.startTimeUTC | date:'shortTime') }}
+        }
+      </div>
+    </div>
+
+
+    <div class="gd-grid">
+      
+      <!-- TEAM MATCHUP -->
+      <div class="gd-panel gd-panel-wide">
+        <h3 class="nhl-panel-title">Team Matchup</h3>
+        @if (gameData.gameState !== 'FUT') {
+          <div class="gd-stat-row">
+            <span class="gd-stat-val">{{ gameData.awayTeam?.score ?? 0 }}</span>
+            <span class="gd-stat-lbl">Goals</span>
+            <span class="gd-stat-val">{{ gameData.homeTeam?.score ?? 0 }}</span>
+          </div>
+          <div class="gd-stat-row">
+            <span class="gd-stat-val">{{ gameData.awayTeam?.sog ?? 0 }}</span>
+            <span class="gd-stat-lbl">Shots on Goal</span>
+            <span class="gd-stat-val">{{ gameData.homeTeam?.sog ?? 0 }}</span>
+          </div>
+        } @else {
+          <p style="text-align: center; color: #888; padding: 2rem 0;">Game has not started yet.</p>
+        }
+      </div>
+
+      <!-- SCORING -->
+      <div class="gd-panel">
+        <h3 class="nhl-panel-title">Scoring Summary</h3>
+        @if (gameData.summary?.scoring?.length) {
+          <div class="gd-events">
+            @for (period of gameData.summary.scoring; track period.periodDescriptor?.number) {
+              
+              <div style="font-weight: 800; font-size: 0.8rem; color: #666; margin-top: 1rem; text-transform: uppercase;">
+                {{ period.periodDescriptor?.periodType }} {{ period.periodDescriptor?.number || '' }}
+              </div>
+              
+              @if (period.goals?.length) {
+                @for (goal of period.goals; track goal.timeInPeriod) {
+                  <div class="gd-event">
+                    <img [src]="(goal.teamAbbrev?.default || goal.teamAbbrev) === gameData.awayTeam?.abbrev ? gameData.awayTeam?.logo : gameData.homeTeam?.logo" style="width: 24px; height: 24px" alt="Team">
+                    <span class="gd-event-time">{{ goal.timeInPeriod }}</span>
+                    <span class="gd-event-desc">
+                      <b>{{ goal.firstName?.default || goal.name?.default }} {{ goal.lastName?.default || '' }}</b>
+                      <!-- We use ?.default as player names can be localized in NHL API -->
+                    </span>
+                  </div>
+                }
+              } @else {
+                <div class="gd-event" style="justify-content: center; color: #666">No goals scored</div>
+              }
+            }
+          </div>
+        } @else {
+          <p style="color: #666; font-size: 0.9rem; padding: 1rem 0;">No scoring information available.</p>
+        }
+      </div>
+
+      <!-- PENALTIES -->
+      <div class="gd-panel">
+        <h3 class="nhl-panel-title">Penalties</h3>
+        @if (gameData.summary?.penalties?.length) {
+          <div class="gd-events">
+            @for (period of gameData.summary.penalties; track period.periodDescriptor?.number) {
+              
+              <div style="font-weight: 800; font-size: 0.8rem; color: #666; margin-top: 1rem; text-transform: uppercase;">
+                {{ period.periodDescriptor?.periodType }} {{ period.periodDescriptor?.number || '' }}
+              </div>
+              
+              @if (period.penalties?.length) {
+                @for (pen of period.penalties; track pen.timeInPeriod) {
+                  <div class="gd-event">
+                    <img [src]="(pen.teamAbbrev?.default || pen.teamAbbrev) === gameData.awayTeam?.abbrev ? gameData.awayTeam?.logo : gameData.homeTeam?.logo" style="width: 24px; height: 24px; object-fit: contain" alt="Team">
+                    <span class="gd-event-time">{{ pen.timeInPeriod }}</span>
+                    <span class="gd-event-desc">
+                      <b>{{ pen.descKey }}</b> ({{ pen.duration }} min) - {{ pen.servedBy?.firstName?.default || pen.committedByPlayer?.default || 'Bench penalty' }}
+                    </span>
+                  </div>
+                }
+              } @else {
+                <div class="gd-event" style="justify-content: center; color: #666">No penalties</div>
+              }
+            }
+          </div>
+        } @else {
+          <p style="color: #666; font-size: 0.9rem; padding: 1rem 0;">No penalty information available.</p>
+        }
+      </div>
+
+    </div>
+
+  </div>
+  }
+  }
+</div>

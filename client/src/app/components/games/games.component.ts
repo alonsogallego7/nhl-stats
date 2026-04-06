@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { GamesService } from '../../services/games/games.service';
 
 @Component({
@@ -12,6 +13,11 @@ export class GamesComponent implements OnInit {
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
 
   private gamesService = inject(GamesService);
+  private router = inject(Router);
+
+  goToGame(id: number) {
+    this.router.navigate(['/games', id]);
+  }
 
   games: any[] = [];
   isLoading: boolean = true;

@@ -41,6 +41,7 @@ export interface ScoreResponse {
 })
 export class GamesService {
   private gamesCache$: Observable<ScoreResponse> | null = null;
+  private boxscoreCache$: Map<string | number, Observable<any>> = new Map();
   private http = inject(HttpClient);
 
   getGames(): Observable<ScoreResponse> {
@@ -50,5 +51,15 @@ export class GamesService {
       );
     }
     return this.gamesCache$;
+  }
+
+  getGameBoxscore(gameId: string | number): Observable<any> {
+    if (!this.boxscoreCache$.has(gameId)) {
+      const boxscore$ = this.http.get<any>(`${environment.apiUrl}/games/game/${gameId}/landing`).pipe(
+        shareReplay(1)
+      );
+      this.boxscoreCache$.set(gameId, boxscore$);
+    }
+    return this.boxscoreCache$.get(gameId)!;
   }
 }

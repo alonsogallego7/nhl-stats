@@ -15,7 +15,7 @@
       <!-- Games Grid -->
       <div class="games-grid">
         @for (game of games; track game.id) {
-        <div class="game-card" [class.game-live]="isLive(game)">
+        <div class="game-card" [class.game-live]="isLive(game)" (click)="goToGame(game.id)">
           
           <div class="game-header">
             <span class="game-status" [class.status-live]="isLive(game)">
@@ -26,7 +26,7 @@
 
           <div class="game-matchup">
             <!-- Away Team -->
-            <div class="team" [routerLink]="['/teams', game.awayTeam.abbrev]">
+            <div class="team" [routerLink]="['/teams', game.awayTeam.abbrev]" (click)="$event.stopPropagation()">
               <img [src]="game.awayTeam.logo" [alt]="game.awayTeam.abbrev" class="team-logo" />
               <span class="team-abbrev">{{ game.awayTeam.abbrev }}</span>
             </div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Home Team -->
-            <div class="team" [routerLink]="['/teams', game.homeTeam.abbrev]">
+            <div class="team" [routerLink]="['/teams', game.homeTeam.abbrev]" (click)="$event.stopPropagation()">
               <img [src]="game.homeTeam.logo" [alt]="game.homeTeam.abbrev" class="team-logo" />
               <span class="team-abbrev">{{ game.homeTeam.abbrev }}</span>
             </div>

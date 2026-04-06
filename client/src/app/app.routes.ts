@@ -7,6 +7,7 @@ import { StandingsFullComponent } from './components/standings-full/standings-fu
 import { TeamDetailComponent } from './components/team-detail/team-detail.component';
 import { StatsFullComponent } from './components/stats-full/stats-full.component';
 import { GameCenterComponent } from './components/game-center/game-center.component';
+import { GameDetailComponent } from './components/game-detail/game-detail.component';
 
 export const routes: Routes = [
   { path: '', component: MainViewComponent },
@@ -16,7 +17,8 @@ export const routes: Routes = [
   { path: 'teams/:abbrev', component: TeamDetailComponent },
   { path: 'players', component: PlayersComponent },
   { path: 'players/:id', component: PlayerDetailComponent },
-  { path: 'games', component: GameCenterComponent }
+  { path: 'games', component: GameCenterComponent },
+  { path: 'games/:id', component: GameDetailComponent }
 ];
 
 

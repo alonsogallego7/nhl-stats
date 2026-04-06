@@ -20,7 +20,7 @@
     <div #carousel class="carousel-scroll">
       <div class="carousel-inner">
         @for (game of games; track game.id) {
-          <div class="game-card">
+          <div class="game-card" (click)="goToGame(game.id)" style="cursor: pointer;">
             <div class="game-card-header">
               <span>{{ game.gameDate | date:'MMM d' }}</span>
               <span [class.live]="game.gameState === 'LIVE' || game.gameState === 'CRIT'">
