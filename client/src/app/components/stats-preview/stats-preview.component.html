@@ -24,7 +24,7 @@
       </div>
       <div class="stat-list">
         @for (player of pointsLeaders; track player.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/players', player.id]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
             <div class="stat-info">
@@ -44,7 +44,7 @@
       </div>
       <div class="stat-list">
         @for (player of goalsLeaders; track player.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/players', player.id]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
             <div class="stat-info">
@@ -64,7 +64,7 @@
       </div>
       <div class="stat-list">
         @for (player of assistsLeaders; track player.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/players', player.id]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="player.headshot" [alt]="player.lastName.default" class="stat-img player-img" (error)="player.headshot = player.teamLogo">
             <div class="stat-info">
@@ -84,7 +84,7 @@
       </div>
       <div class="stat-list">
         @for (team of teamPointsLeaders; track team.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/teams', team.teamAbbrev]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
             <div class="stat-info">
@@ -104,7 +104,7 @@
       </div>
       <div class="stat-list">
         @for (team of teamGoalsForLeaders; track team.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/teams', team.teamAbbrev]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
             <div class="stat-info">
@@ -124,7 +124,7 @@
       </div>
       <div class="stat-list">
         @for (team of teamGoalDiffLeaders; track team.id; let i = $index) {
-          <div class="stat-item">
+          <div class="stat-item" [routerLink]="['/teams', team.teamAbbrev]" style="cursor: pointer;">
             <span class="stat-rank">{{ i + 1 }}</span>
             <img [src]="team.teamLogo" [alt]="team.teamName.default" class="stat-img team-img">
             <div class="stat-info">

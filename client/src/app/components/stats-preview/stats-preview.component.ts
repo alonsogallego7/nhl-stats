@@ -1,8 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { StatsService, StatLeader, TeamLeader } from '../../services/stats/stats.service';
 
 @Component({
   selector: 'app-stats-preview',
+  imports: [RouterLink],
   templateUrl: './stats-preview.component.html',
   styleUrls: ['./stats-preview.component.css']
 })
