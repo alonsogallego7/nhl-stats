@@ -1,0 +1,244 @@
+<div class="nhl-page">
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  <div class="nhl-content">
+    <div class="nhl-inner">
+
+      <!-- Title -->
+      <div class="nhl-title-section">
+        <h2 class="page-title">Statistics</h2>
+      </div>
+
+      <!-- Toggle -->
+      <div class="stats-toggle">
+        <button
+          class="toggle-btn"
+          [class.toggle-btn--active]="activeTab === 'players'"
+          (click)="setTab('players')"
+        >Players</button>
+        <button
+          class="toggle-btn"
+          [class.toggle-btn--active]="activeTab === 'teams'"
+          (click)="setTab('teams')"
+        >Teams</button>
+      </div>
+
+      <!-- ── PLAYER / GOALIE LEADERS ── -->
+      @if (activeTab === 'players') {
+      <div class="stats-grid">
+
+        <!-- Points -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Points Leaders</h3>
+          <ol class="leaders-list">
+            @for (p of pointsLeaders; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value">{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Goals -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Goals Leaders</h3>
+          <ol class="leaders-list">
+            @for (p of goalsLeaders; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value">{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Assists -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Assists Leaders</h3>
+          <ol class="leaders-list">
+            @for (p of assistsLeaders; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value">{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Plus/Minus -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">+/- Leaders</h3>
+          <ol class="leaders-list">
+            @for (p of plusMinusLeaders; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value leader-value--pos">{{ p.value > 0 ? '+' : '' }}{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Penalty Minutes -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Penalty Mins</h3>
+          <ol class="leaders-list">
+            @for (p of penaltyMinsLeaders; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value">{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Goalie Wins -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Goalie Wins</h3>
+          <ol class="leaders-list">
+            @for (p of goalieWins; track p.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/players', p.id]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="p.headshot" [alt]="fullName(p)" class="leader-headshot" />
+              <div class="leader-info">
+                <span class="leader-name">{{ fullName(p) }}</span>
+                <div class="leader-meta">
+                  <img [src]="p.teamLogo" [alt]="p.teamAbbrev" class="leader-team-logo" />
+                  <span class="leader-team">{{ p.teamAbbrev }}</span>
+                </div>
+              </div>
+              <span class="leader-value">{{ p.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+      </div>
+      }
+
+      <!-- ── TEAM LEADERS ── -->
+      @if (activeTab === 'teams') {
+      <div class="stats-grid">
+
+        <!-- Points -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Points</h3>
+          <ol class="leaders-list">
+            @for (t of teamPoints; track t.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/teams', t.teamAbbrev]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="t.teamLogo" [alt]="t.teamAbbrev" class="leader-team-logo-lg" />
+              <div class="leader-info">
+                <span class="leader-name">{{ t.teamName.default }}</span>
+                <span class="leader-team">{{ t.teamAbbrev }}</span>
+              </div>
+              <span class="leader-value">{{ t.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Goals For -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Goals For</h3>
+          <ol class="leaders-list">
+            @for (t of teamGoalsFor; track t.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/teams', t.teamAbbrev]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="t.teamLogo" [alt]="t.teamAbbrev" class="leader-team-logo-lg" />
+              <div class="leader-info">
+                <span class="leader-name">{{ t.teamName.default }}</span>
+                <span class="leader-team">{{ t.teamAbbrev }}</span>
+              </div>
+              <span class="leader-value">{{ t.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Goal Differential -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Goal Differential</h3>
+          <ol class="leaders-list">
+            @for (t of teamGoalDiff; track t.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/teams', t.teamAbbrev]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="t.teamLogo" [alt]="t.teamAbbrev" class="leader-team-logo-lg" />
+              <div class="leader-info">
+                <span class="leader-name">{{ t.teamName.default }}</span>
+                <span class="leader-team">{{ t.teamAbbrev }}</span>
+              </div>
+              <span class="leader-value leader-value--diff">{{ t.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Goals Against -->
+        <div class="stats-panel">
+          <h3 class="nhl-panel-title">Goals Against</h3>
+          <ol class="leaders-list">
+            @for (t of teamGoalAgainst; track t.id; let i = $index) {
+            <li class="leader-row" [routerLink]="['/teams', t.teamAbbrev]">
+              <span class="leader-rank">{{ i + 1 }}</span>
+              <img [src]="t.teamLogo" [alt]="t.teamAbbrev" class="leader-team-logo-lg" />
+              <div class="leader-info">
+                <span class="leader-name">{{ t.teamName.default }}</span>
+                <span class="leader-team">{{ t.teamAbbrev }}</span>
+              </div>
+              <span class="leader-value">{{ t.value }}</span>
+            </li>
+            }
+          </ol>
+        </div>
+
+      </div>
+      }
+
+    </div>
+  </div>
+  }
+</div>

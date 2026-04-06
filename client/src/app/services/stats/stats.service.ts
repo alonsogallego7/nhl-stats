@@ -17,9 +17,13 @@ export interface StatLeader {
 }
 
 export interface StatsResponse {
-  points: StatLeader[];
-  goals: StatLeader[];
-  assists: StatLeader[];
+  points:           StatLeader[];
+  goals:            StatLeader[];
+  assists:          StatLeader[];
+  plusMinus:        StatLeader[];
+  penaltyMins:      StatLeader[];
+  goalieWins:       StatLeader[];
+  goalieSavePctg:   StatLeader[];
 }
 
 export interface TeamLeader {
@@ -31,9 +35,10 @@ export interface TeamLeader {
 }
 
 export interface TeamStatsResponse {
-  points: TeamLeader[];
-  goalsFor: TeamLeader[];
+  points:           TeamLeader[];
+  goalsFor:         TeamLeader[];
   goalDifferential: TeamLeader[];
+  goalAgainst:      TeamLeader[];
 }
 
 @Injectable({
