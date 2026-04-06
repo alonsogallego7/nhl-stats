@@ -1,0 +1,191 @@
+.games-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card Style */
+.game-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.game-live {
+  border-top: 3px solid #dc2626; /* Red top border for live games */
+}
+
+/* Header */
+.game-header {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f2f2f2;
+  text-align: center;
+  background: #fafafa;
+}
+
+.game-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.status-live {
+  color: #dc2626;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: #dc2626;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(220, 38, 38, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* Matchup */
+.game-matchup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  cursor: pointer;
+}
+
+.team:hover .team-abbrev {
+  color: #000;
+}
+
+.team-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.2s;
+}
+
+.team:hover .team-logo {
+  transform: scale(1.1);
+}
+
+.team-abbrev {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #555;
+  transition: color 0.15s;
+}
+
+/* Score Block */
+.game-score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex: 1.2;
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #333;
+  line-height: 1;
+}
+
+.score-divider {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ccc;
+}
+
+.score-winner {
+  color: #000;
+}
+
+/* Footer SOG */
+.game-footer {
+  display: flex;
+  border-top: 1px solid #f2f2f2;
+}
+
+.sog-box {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #fdfdfd;
+}
+
+.sog-box:first-child {
+  border-right: 1px solid #f2f2f2;
+}
+
+.sog-box b {
+  color: #555;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
+.game-footer-off {
+  justify-content: center;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #fdfdfd;
+}
+
+.no-games {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+}

@@ -1,0 +1,77 @@
+<div class="nhl-page">
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  @if (!isLoading) {
+  <app-navbar></app-navbar>
+
+  <div class="nhl-content">
+    <div class="nhl-inner">
+
+      <!-- Title -->
+      <div class="nhl-title-section">
+        <h2 class="page-title">Game Center</h2>
+      </div>
+
+      <!-- Games Grid -->
+      <div class="games-grid">
+        @for (game of games; track game.id) {
+        <div class="game-card" [class.game-live]="isLive(game)">
+          
+          <div class="game-header">
+            <span class="game-status" [class.status-live]="isLive(game)">
+              @if (isLive(game)) { <span class="live-dot"></span> }
+              {{ getGameStatus(game) }}
+            </span>
+          </div>
+
+          <div class="game-matchup">
+            <!-- Away Team -->
+            <div class="team" [routerLink]="['/teams', game.awayTeam.abbrev]">
+              <img [src]="game.awayTeam.logo" [alt]="game.awayTeam.abbrev" class="team-logo" />
+              <span class="team-abbrev">{{ game.awayTeam.abbrev }}</span>
+            </div>
+
+            <!-- Score / Divider -->
+            <div class="game-score-box">
+              <span class="score" [class.score-winner]="game.gameState === 'FINAL' && (game.awayTeam.score ?? 0) > (game.homeTeam.score ?? 0)">
+                {{ game.awayTeam.score ?? '-' }}
+              </span>
+              <span class="score-divider">-</span>
+              <span class="score" [class.score-winner]="game.gameState === 'FINAL' && (game.homeTeam.score ?? 0) > (game.awayTeam.score ?? 0)">
+                {{ game.homeTeam.score ?? '-' }}
+              </span>
+            </div>
+
+            <!-- Home Team -->
+            <div class="team" [routerLink]="['/teams', game.homeTeam.abbrev]">
+              <img [src]="game.homeTeam.logo" [alt]="game.homeTeam.abbrev" class="team-logo" />
+              <span class="team-abbrev">{{ game.homeTeam.abbrev }}</span>
+            </div>
+          </div>
+
+          <!-- Footer Metadata (SOG) -->
+          @if (game.gameState !== 'OFF') {
+          <div class="game-footer">
+            <div class="sog-box">SOG: <b>{{ game.awayTeam.sog ?? 0 }}</b></div>
+            <div class="sog-box">SOG: <b>{{ game.homeTeam.sog ?? 0 }}</b></div>
+          </div>
+          } @else {
+          <div class="game-footer game-footer-off">
+            <span>Upcoming Matchup</span>
+          </div>
+          }
+
+        </div>
+        }
+
+        @if (games.length === 0) {
+        <div class="no-games">
+          <p>No games scheduled for today.</p>
+        </div>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+</div>
