@@ -27,6 +27,7 @@
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .game-card:hover {
@@ -38,43 +39,51 @@
   border-top: 3px solid #dc2626; /* Red top border for live games */
 }
 
-/* Header */
+/* Header Modernizado */
 .game-header {
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid #f2f2f2;
-  text-align: center;
-  background: #fafafa;
-}
-
-.game-status {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #888;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.status-live {
-  color: #dc2626;
+.status-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  background: #f0f0f0;
+  color: #666;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.live-dot {
-  width: 6px;
-  height: 6px;
-  background: #dc2626;
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
+.status-badge.live {
+  background: #ef4444;
+  color: #fff;
 }
 
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(220, 38, 38, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+.status-badge.final {
+  background: #000;
+  color: #fff;
+}
+
+.venue-info {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Matchup */
@@ -82,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .team {
@@ -99,20 +108,20 @@
 }
 
 .team-logo {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  transition: transform 0.2s;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .team:hover .team-logo {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .team-abbrev {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 800;
-  color: #555;
+  color: #666;
   transition: color 0.15s;
 }
 
@@ -126,57 +135,84 @@
 }
 
 .score {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #333;
+  font-size: 2.75rem;
+  font-weight: 950;
+  color: #111;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .score-divider {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #ccc;
+  color: #ddd;
 }
 
 .score-winner {
   color: #000;
 }
 
-/* Footer SOG */
-.game-footer {
+/* Footer Modernizado */
+.game-footer-modern {
   display: flex;
-  border-top: 1px solid #f2f2f2;
-}
-
-.sog-box {
-  flex: 1;
-  text-align: center;
-  padding: 0.5rem;
-  font-size: 0.65rem;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: #fdfdfd;
-}
-
-.sog-box:first-child {
-  border-right: 1px solid #f2f2f2;
-}
-
-.sog-box b {
-  color: #555;
-  font-size: 0.75rem;
-  margin-left: 0.25rem;
-}
-
-.game-footer-off {
+  align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  font-size: 0.65rem;
-  color: #aaa;
-  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  background: #fcfcfc;
+  border-top: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.game-card:hover .game-footer-modern {
+  background: #f8f8f8;
+}
+
+.footer-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.stat-label {
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: #bbb;
   letter-spacing: 0.05em;
-  background: #fdfdfd;
+}
+
+.stat-values {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #444;
+}
+
+.stat-values .divider {
+  color: #ddd;
+  margin: 0 0.15rem;
+}
+
+.footer-action {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #888;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.game-card:hover .footer-action {
+  color: #000;
+  transform: translateX(3px);
+}
+
+.live-dot {
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
 }
 
 .no-games {

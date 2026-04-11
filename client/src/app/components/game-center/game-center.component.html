@@ -18,10 +18,11 @@
         <div class="game-card" [class.game-live]="isLive(game)" (click)="goToGame(game.id)">
           
           <div class="game-header">
-            <span class="game-status" [class.status-live]="isLive(game)">
+            <div class="status-badge" [class.live]="isLive(game)" [class.final]="game.gameState === 'FINAL'">
               @if (isLive(game)) { <span class="live-dot"></span> }
               {{ getGameStatus(game) }}
-            </span>
+            </div>
+            <div class="venue-info">{{ game.venue.default }}</div>
           </div>
 
           <div class="game-matchup">
@@ -49,17 +50,13 @@
             </div>
           </div>
 
-          <!-- Footer Metadata (SOG) -->
-          @if (game.gameState !== 'OFF') {
-          <div class="game-footer">
-            <div class="sog-box">SOG: <b>{{ game.awayTeam.sog ?? 0 }}</b></div>
-            <div class="sog-box">SOG: <b>{{ game.homeTeam.sog ?? 0 }}</b></div>
+          <!-- Modern Footer -->
+          <div class="game-footer-modern">
+            <div class="footer-action">
+              <span>GAME DETAILS</span>
+              <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
+            </div>
           </div>
-          } @else {
-          <div class="game-footer game-footer-off">
-            <span>Upcoming Matchup</span>
-          </div>
-          }
 
         </div>
         }

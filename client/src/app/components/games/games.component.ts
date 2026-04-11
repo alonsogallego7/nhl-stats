@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild, OnInit, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { GamesService } from '../../services/games/games.service';
 
 @Component({
   selector: 'app-games',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './games.component.html',
   styleUrl: './games.component.css'
 })
