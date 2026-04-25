@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://nhl-stats-server.vercel.app/' //http://localhost:3000
 };
