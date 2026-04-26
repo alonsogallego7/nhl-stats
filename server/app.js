@@ -12,7 +12,7 @@ var statsRouter = require('./routes/stats');
 var app = express();
 
 app.use(cors({
-  origin: 'https://nhl-stats-blush.vercel.app', // Tu URL de Angular
+  origin: ['https://nhl-stats-blush.vercel.app', 'http://localhost:4200'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

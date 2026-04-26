@@ -20,13 +20,20 @@ async function getTeamMap() {
 // Optional utility to delay execution
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+let fallbackPlayers = [];
+try {
+  fallbackPlayers = require('../utils/fallback_players.json');
+} catch (e) {
+  console.warn('[CACHE] Fallback players file not found or invalid.');
+}
+
 let allPlayersCache = {
   timestamp: 0,
-  data: [],
+  data: fallbackPlayers,
   isFetching: false
 };
 
-// Background task to warm the cache slowly
+// Background task to warm the cache slowly but efficiently
 async function warmPlayersCache() {
   if (allPlayersCache.isFetching) return;
   allPlayersCache.isFetching = true;
@@ -36,6 +43,8 @@ async function warmPlayersCache() {
     const triCodes = Object.keys(teamMap);
     const allPlayers = [];
 
+    // Process sequentially to be fully safe against NHL API rate limits
+    // The user will not feel this delay due to the Vercel Edge caching headers
     for (const triCode of triCodes) {
       try {
         const data = await apiCall(`v1/roster/${triCode}/current`);
@@ -55,10 +64,11 @@ async function warmPlayersCache() {
           teamName: teamMap[triCode]?.fullName || '',
           teamLogo: teamMap[triCode]?.logo || ''
         }));
+        
         allPlayers.push(...mapped);
         
-        // 150ms delay to respect Cloudflare rate limits
-        await sleep(150);
+        // 250ms delay between teams ensures we don't trigger 429 Too Many Requests
+        await sleep(250);
       } catch (err) {
         console.warn(`[CACHE WARMUP] Failed to fetch roster for ${triCode}:`, err.message);
       }
@@ -78,6 +88,9 @@ warmPlayersCache();
 // GET /players/all — returns all players from all team rosters
 router.get('/all', async function(req, res, next) {
   try {
+    // Enable Vercel Edge caching for 24 hours to eliminate cold starts for users
+    res.setHeader('Cache-Control', 'max-age=0, s-maxage=86400, stale-while-revalidate');
+
     const now = Date.now();
     
     // Stale-while-revalidate: If we have data but it's older than 1 hour, trigger a background refresh
