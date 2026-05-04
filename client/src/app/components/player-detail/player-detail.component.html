@@ -139,9 +139,8 @@
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.plusMinus > 0 ? '+' : '' }}{{ currentNHLSeason.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ currentNHLSeason.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">SOG</span></div>
         </div>
       </div>
       }
@@ -155,9 +154,8 @@
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.plusMinus > 0 ? '+' : '' }}{{ careerRegular.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerRegular.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">SOG</span></div>
         </div>
       </div>
       }
@@ -171,9 +169,8 @@
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.goals }}</span><span class="pd-stat-lbl" data-tooltip="Goals">Goals</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.assists }}</span><span class="pd-stat-lbl" data-tooltip="Assists">Assists</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.points }}</span><span class="pd-stat-lbl" data-tooltip="Points">Points</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.plusMinus > 0 ? '+' : '' }}{{ careerPlayoffs.plusMinus }}</span><span class="pd-stat-lbl" data-tooltip="Plus/Minus">+/-</span></div>
           <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.pim }}</span><span class="pd-stat-lbl" data-tooltip="Penalty Minutes">PIM</span></div>
-          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">Shots</span></div>
+          <div class="pd-stat"><span class="pd-stat-val">{{ careerPlayoffs.shots }}</span><span class="pd-stat-lbl" data-tooltip="Shots on Goal">SOG</span></div>
         </div>
       </div>
       }
@@ -205,7 +202,7 @@
             }
           </tbody>
           } @else {
-          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="nhl-th-tip" data-tooltip="Plus/Minus">+/-</th><th class="nhl-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="nhl-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="nhl-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="nhl-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
           <tbody>
             @for (g of player.last5Games; track g.gameId) {
             <tr>
@@ -220,7 +217,6 @@
               <td>{{ g.goals }}</td>
               <td>{{ g.assists }}</td>
               <td class="pd-pts">{{ g.points }}</td>
-              <td>{{ g.plusMinus > 0 ? '+' : '' }}{{ g.plusMinus }}</td>
               <td>{{ g.shots }}</td>
               <td>{{ g.pim }}</td>
               <td>{{ g.toi }}</td>

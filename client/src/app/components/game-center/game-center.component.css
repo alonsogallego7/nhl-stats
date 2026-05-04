@@ -17,14 +17,13 @@
   }
 }
 
-/* Card Style */
 .game-card {
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 0;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -32,7 +31,7 @@
 
 .game-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .game-live {
@@ -45,8 +44,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  background: #ffffff;
+  border-bottom: 1px solid #000000;
 }
 
 .status-badge {
@@ -56,8 +55,8 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 0.25rem 0.6rem;
-  background: #f0f0f0;
-  color: #666;
+  background: #000000;
+  color: #ffffff;
   border-radius: 0;
   display: flex;
   align-items: center;
@@ -77,10 +76,10 @@
 .venue-info {
   font-size: 0.6rem;
   font-weight: 700;
-  color: #aaa;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  max-width: 150px;
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -108,8 +107,8 @@
 }
 
 .team-logo {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -120,9 +119,8 @@
 
 .team-abbrev {
   font-size: 0.85rem;
-  font-weight: 800;
-  color: #666;
-  transition: color 0.15s;
+  font-weight: 900;
+  color: #000000;
 }
 
 /* Score Block */
@@ -137,19 +135,19 @@
 .score {
   font-size: 2.75rem;
   font-weight: 950;
-  color: #111;
+  color: #000000;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 .score-divider {
   font-size: 1.2rem;
-  font-weight: 800;
-  color: #ddd;
+  font-weight: 900;
+  color: #000000;
 }
 
 .score-winner {
-  color: #000;
+  color: #000000;
 }
 
 /* Footer Modernizado */
@@ -158,13 +156,12 @@
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1rem;
-  background: #fcfcfc;
-  border-top: 1px solid #f0f0f0;
-  transition: background 0.2s;
+  background: #ffffff;
+  border-top: 1px solid #000000;
 }
 
 .game-card:hover .game-footer-modern {
-  background: #f8f8f8;
+  background: #ffffff;
 }
 
 .footer-stats {
@@ -175,19 +172,19 @@
 
 .stat-label {
   font-size: 0.55rem;
-  font-weight: 800;
-  color: #bbb;
+  font-weight: 900;
+  color: #000000;
   letter-spacing: 0.05em;
 }
 
 .stat-values {
   font-size: 0.75rem;
   font-weight: 900;
-  color: #444;
+  color: #000000;
 }
 
 .stat-values .divider {
-  color: #ddd;
+  color: #000000;
   margin: 0 0.15rem;
 }
 
@@ -197,13 +194,12 @@
   gap: 0.4rem;
   font-size: 0.65rem;
   font-weight: 900;
-  color: #888;
+  color: #000000;
   letter-spacing: 0.05em;
-  transition: color 0.2s, transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .game-card:hover .footer-action {
-  color: #000;
   transform: translateX(3px);
 }
 
@@ -220,8 +216,8 @@
   text-align: center;
   padding: 3rem;
   font-size: 1rem;
-  font-weight: 600;
-  color: #888;
-  background: #fafafa;
-  border: 1px solid #f0f0f0;
+  font-weight: 900;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #000000;
 }

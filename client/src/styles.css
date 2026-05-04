@@ -319,6 +319,7 @@ img, video {
 .nhl-th-tip {
   position: relative;
   cursor: default;
+  overflow: visible !important;
 }
 
 .nhl-th-tip[data-tooltip]:hover::after {
