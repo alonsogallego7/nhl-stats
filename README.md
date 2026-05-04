@@ -17,7 +17,7 @@ The platform extracts a wide range of information from the official NHL API, inc
 - **Statistics:** Comprehensive performance metrics for both teams and individual players.
 
 ## Technical Stack
-- **Frontend:** Angular 19+ (Signals, RxJS, Standalone Components, etc)
+- **Frontend:** Angular 19+ (Signals, RxJS, Standalone Components)
 - **Backend:** Node.js with Express
 
 ## Project Structure
