@@ -73,6 +73,7 @@
   text-align: left;
   border-collapse: collapse;
   table-layout: fixed;
+  min-width: 600px;
 }
 
 /* Head row */

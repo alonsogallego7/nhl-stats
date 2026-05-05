@@ -179,52 +179,54 @@
       @if (player.last5Games?.length) {
       <div class="pd-panel pd-panel-wide">
         <h3 class="nhl-panel-title">Last 5 Games</h3>
-        <table class="nhl-table">
-          @if (player.position === 'G') {
-          <thead><tr><th>Date</th><th>Opponent</th><th class="nhl-th-tip" data-tooltip="Decision (Win/Loss/Overtime)">Dec</th><th class="nhl-th-tip" data-tooltip="Goals Against">GA</th><th class="nhl-th-tip" data-tooltip="Shots Against">SA</th><th class="nhl-th-tip" data-tooltip="Save Percentage">SV%</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
-          <tbody>
-            @for (g of player.last5Games; track g.gameId) {
-            <tr>
-              <td>{{ g.gameDate }}</td>
-              <td>
-                @if (g.homeRoadFlag === 'H') {
-                  <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
-                } @else {
-                  <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
-                }
-              </td>
-              <td class="pd-decision-{{ g.decision?.toLowerCase() }}">{{ g.decision || '—' }}</td>
-              <td>{{ g.goalsAgainst }}</td>
-              <td>{{ g.shotsAgainst }}</td>
-              <td>{{ formatPct(g.savePctg) }}</td>
-              <td>{{ g.toi }}</td>
-            </tr>
+        <div class="table-responsive">
+          <table class="nhl-table">
+            @if (player.position === 'G') {
+            <thead><tr><th>Date</th><th>Opponent</th><th class="nhl-th-tip" data-tooltip="Decision (Win/Loss/Overtime)">Dec</th><th class="nhl-th-tip" data-tooltip="Goals Against">GA</th><th class="nhl-th-tip" data-tooltip="Shots Against">SA</th><th class="nhl-th-tip" data-tooltip="Save Percentage">SV%</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+            <tbody>
+              @for (g of player.last5Games; track g.gameId) {
+              <tr>
+                <td>{{ g.gameDate }}</td>
+                <td>
+                  @if (g.homeRoadFlag === 'H') {
+                    <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
+                  } @else {
+                    <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
+                  }
+                </td>
+                <td class="pd-decision-{{ g.decision?.toLowerCase() }}">{{ g.decision || '—' }}</td>
+                <td>{{ g.goalsAgainst }}</td>
+                <td>{{ g.shotsAgainst }}</td>
+                <td>{{ formatPct(g.savePctg) }}</td>
+                <td>{{ g.toi }}</td>
+              </tr>
+              }
+            </tbody>
+            } @else {
+            <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="nhl-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="nhl-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
+            <tbody>
+              @for (g of player.last5Games; track g.gameId) {
+              <tr>
+                <td>{{ g.gameDate }}</td>
+                <td>
+                  @if (g.homeRoadFlag === 'H') {
+                    <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
+                  } @else {
+                    <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
+                  }
+                </td>
+                <td>{{ g.goals }}</td>
+                <td>{{ g.assists }}</td>
+                <td class="pd-pts">{{ g.points }}</td>
+                <td>{{ g.shots }}</td>
+                <td>{{ g.pim }}</td>
+                <td>{{ g.toi }}</td>
+              </tr>
+              }
+            </tbody>
             }
-          </tbody>
-          } @else {
-          <thead><tr><th>Date</th><th>Opponent</th><th>Goals</th><th>Assists</th><th>Points</th><th class="nhl-th-tip" data-tooltip="Shots on Goal">SOG</th><th class="nhl-th-tip" data-tooltip="Penalty Minutes">PIM</th><th class="nhl-th-tip" data-tooltip="Time on Ice">TOI</th></tr></thead>
-          <tbody>
-            @for (g of player.last5Games; track g.gameId) {
-            <tr>
-              <td>{{ g.gameDate }}</td>
-              <td>
-                @if (g.homeRoadFlag === 'H') {
-                  <span class="pd-home-badge">HOME</span><span class="pd-opp-home">{{ g.opponentAbbrev }}</span>
-                } @else {
-                  <span class="pd-away-badge">AWAY</span><span class="pd-opp-away">{{ g.opponentAbbrev }}</span>
-                }
-              </td>
-              <td>{{ g.goals }}</td>
-              <td>{{ g.assists }}</td>
-              <td class="pd-pts">{{ g.points }}</td>
-              <td>{{ g.shots }}</td>
-              <td>{{ g.pim }}</td>
-              <td>{{ g.toi }}</td>
-            </tr>
-            }
-          </tbody>
-          }
-        </table>
+          </table>
+        </div>
       </div>
       }
 

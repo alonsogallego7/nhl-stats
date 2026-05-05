@@ -315,6 +315,12 @@ img, video {
 .nhl-table tr:hover td { background: #fafafa; }
 .nhl-table tr:last-child td { border-bottom: none; }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* CSS Tooltip */
 .nhl-th-tip {
   position: relative;
